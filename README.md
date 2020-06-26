@@ -1,4 +1,4 @@
-<h1 align="center">Foodify</h1>
+<h1 align="center">Foodify 🌮</h1>
 <p align="center">Food and fy</p>
 <p align="center">
     <a href="https://github.com/codelabsab/foodify/actions?query=workflow%3ATest"><img src="https://github.com/codelabsab/foodify/workflows/Test/badge.svg"/></a>
