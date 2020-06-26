@@ -1,0 +1,37 @@
+kind: Module
+name: grafana-volume
+type: persistentvolumeclaim
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 8Gi
+---
+kind: Module
+name: grafana
+description: Grafana
+type: container
+dockerfile: ./Dockerfile
+include:
+  - Dockerfile
+  - config/**/*
+services:
+  - name: grafana
+    dependencies:
+      - prometheus
+      - loki
+    replicas: 1
+    ingresses:
+      - path: /grafana
+        port: web
+    env:
+      GF_SERVER_DOMAIN: "${environment.name == 'prod' ? '' : providers.local-kubernetes.outputs.default-hostname}"
+      GF_SERVER_ROOT_URL: "http://${environment.name == 'prod' ? '' : providers.local-kubernetes.outputs.default-hostname}/grafana/"
+      GF_SERVER_SERVE_FROM_SUB_PATH: true
+    ports:
+      - name: web
+        containerPort: 3000
+    volumes:
+      - name: grafana-volume
+        module: grafana-volume
+        containerPath: /var/lib/grafana

@@ -2,6 +2,42 @@ kind: Project
 name: foodify
 environments:
   - name: local
+defaultEnvironment: local
 providers:
   - name: local-kubernetes
     environments: ["local"]
+---
+kind: Module
+description: Prometheus is used for metrics collection
+type: helm
+name: prometheus
+repo: https://kubernetes-charts.storage.googleapis.com/
+chart: prometheus-operator
+version: "8.13.12"
+values:
+  grafana:
+    enabled: false
+  prometheus:
+    prometheusSpec:
+      serviceMonitorSelectorNilUsesHelmValues: true
+    additionalServiceMonitors:
+      - name: grafana
+        endpoints:
+          - port: web
+            interval: 5s
+        selector:
+          matchLabels:
+            service: grafana
+---
+kind: Module
+description: Loki stores logs for usage in grafana
+type: helm
+name: loki
+repo: https://grafana.github.io/loki/charts
+chart: loki-stack
+version: "0.37.3"
+values:
+  promtail:
+    enabled: true
+    loki:
+      serviceName: loki

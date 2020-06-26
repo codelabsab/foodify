@@ -9,11 +9,11 @@ use std::sync::Arc;
 use crate::server::query::Query;
 use slog::Logger;
 use uuid::Uuid;
+use std::net::SocketAddr;
 
 
-pub async fn setup_server(logger: &Logger) {
+pub async fn setup_server(logger: &Logger, address: SocketAddr) {
     info!(logger, "Setting up server");
-    let addr = ([127, 0, 0, 1], 3000).into();
 
     let root_node = Arc::new(RootNode::new(
         Query,
@@ -51,11 +51,11 @@ pub async fn setup_server(logger: &Logger) {
         }
     });
 
-    let server = Server::bind(&addr)
+    let server = Server::bind(&address)
         .serve(new_service)
         .with_graceful_shutdown(shutdown_signal(&logger));
 
-    info!(logger, "Server started! 🚀"; "address" => format!("http://{}", addr));
+    info!(logger, "Server started! 🚀"; "address" => format!("http://{}", address));
 
     if let Err(e) = server.await {
         eprintln!("server error: {}", e)

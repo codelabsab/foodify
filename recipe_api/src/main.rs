@@ -9,6 +9,9 @@ use crate::server::setup_server;
 use sloggers::terminal::TerminalLoggerBuilder;
 use sloggers::Build;
 use crate::print_banner::print_banner;
+use std::env;
+use std::net::SocketAddr;
+use std::str::FromStr;
 
 #[tokio::main]
 async fn main() -> Result<(), ()> {
@@ -20,7 +23,13 @@ async fn main() -> Result<(), ()> {
 
     info!(logger, "Starting Recipe API ⭐️");
 
-    setup_server(&logger).await;
+    let address = if let Ok(var) = env::var("ADDRESS") {
+        SocketAddr::from_str(&var).expect("env var ADDRESS must contain a valid ip4 address")
+    } else {
+        ([127, 0, 0, 1], 3000).into()
+    };
+
+    setup_server(&logger, address).await;
 
     Ok(())
 }

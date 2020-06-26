@@ -36,24 +36,27 @@ Rustup will automatically install the latest stable release ✨
 
 # Developing
 
-## Running cluster locally
+## Local cluster
 
 All you need to do is to run the command below and garden will do all the setup for you
 ```shell script
 garden dev
 ```
 
-This command will automatically discover your locall kubernetes cluster and the deploy all our resources on it, cool 
-huh!
+This command will automatically discover your local kubernetes cluster and then deploy all our resources on it, cool 
+huh! Once everything is running (might take a while on first run) you can access the graphql playground at 
+[http://foodify.local.app.garden/](http://foodify.local.app.garden/), and grafana at 
+[http://foodify.local.app.garden/grafana](http://foodify.local.app.garden/grafana). Garden will track your files and 
+rebuild your services when needed.
 
-## Testing that the code builds
+## Build code
 
 You can verify that all our rust code builds with this simple command: 
 ```shell script
 cargo build
 ```
 
-## Testing the rust code
+## Test code
 You can test the rust code with this command:
 ```shell script
 cargo test
