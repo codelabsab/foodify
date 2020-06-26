@@ -1,0 +1,13 @@
+kind: Module
+name: recipe-api
+type: container
+services:
+  - name: recipe-api
+    ingresses:
+      - path: /api
+        port: http
+    dependencies:
+      - firestore-emulator
+    ports:
+      - name: http
+        containerPort: 3000

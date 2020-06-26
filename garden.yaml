@@ -1,0 +1,7 @@
+kind: Project
+name: foodify
+environments:
+  - name: local
+providers:
+  - name: local-kubernetes
+    environments: ["local"]
