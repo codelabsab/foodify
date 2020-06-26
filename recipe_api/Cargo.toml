@@ -13,3 +13,4 @@ juniper = { git = "https://github.com/graphql-rust/juniper" }
 juniper_hyper = { git = "https://github.com/graphql-rust/juniper" }
 slog = "2.5.2"
 sloggers = "1.0.1"
+uuid = { version = "0.8", features = ["serde", "v4"] }

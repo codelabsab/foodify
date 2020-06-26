@@ -1,3 +1,6 @@
+use uuid::Uuid;
+use crate::recipe::Recipe;
+
 
 pub struct Query;
 
@@ -5,5 +8,9 @@ pub struct Query;
 impl Query {
     fn api_version(&self) -> &str {
         "1.2.3"
+    }
+
+    fn recipe(&self, id: Uuid) -> Recipe {
+        Recipe::default()
     }
 }

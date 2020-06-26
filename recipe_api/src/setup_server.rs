@@ -7,9 +7,10 @@ use juniper::{
 };
 use std::sync::Arc;
 use crate::query::Query;
+use slog::Logger;
 
 
-pub async fn setup_server() {
+pub async fn setup_server(logger: &Logger) {
     let addr = ([127, 0, 0, 1], 3000).into();
 
     let db = Arc::new(());
@@ -45,7 +46,7 @@ pub async fn setup_server() {
     });
 
     let server = Server::bind(&addr).serve(new_service);
-    println!("Listening on http://{}", addr);
+    info!(logger, "Listening on http://{}", addr);
 
     if let Err(e) = server.await {
         eprintln!("server error: {}", e)
