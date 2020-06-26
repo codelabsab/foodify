@@ -6,12 +6,13 @@ use juniper::{
     EmptyMutation, EmptySubscription, RootNode,
 };
 use std::sync::Arc;
-use crate::query::Query;
+use crate::server::query::Query;
 use slog::Logger;
 use uuid::Uuid;
 
 
 pub async fn setup_server(logger: &Logger) {
+    info!(logger, "Setting up server");
     let addr = ([127, 0, 0, 1], 3000).into();
 
     let root_node = Arc::new(RootNode::new(
@@ -31,7 +32,7 @@ pub async fn setup_server(logger: &Logger) {
                 let ctx = Arc::new(());
                 let logger = logger.new(o!("request_id" => Uuid::new_v4().to_string()));
 
-                info!(logger, "Received request at {} {}", req.method(), req.uri().path());
+                info!(logger, "Received request"; "method" => req.method().to_string(), "path" => req.uri().path().to_string());
 
                 async move {
                     match (req.method(), req.uri().path()) {
@@ -54,7 +55,7 @@ pub async fn setup_server(logger: &Logger) {
         .serve(new_service)
         .with_graceful_shutdown(shutdown_signal(&logger));
 
-    info!(logger, "Listening on http://{}", addr);
+    info!(logger, "Server started! 🚀"; "address" => format!("http://{}", addr));
 
     if let Err(e) = server.await {
         eprintln!("server error: {}", e)

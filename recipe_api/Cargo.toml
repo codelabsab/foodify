@@ -15,3 +15,4 @@ slog = "2.5.2"
 sloggers = "1.0.1"
 uuid = { version = "0.8", features = ["serde", "v4"] }
 colored = "1.9.3"
+chrono = "0.4.11"

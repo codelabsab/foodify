@@ -1,5 +1,5 @@
 use uuid::Uuid;
-use crate::recipe::Recipe;
+use crate::server::recipe::Recipe;
 
 const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
@@ -11,6 +11,7 @@ impl Query {
         VERSION
     }
 
+    #[graphql(description = "A single recipe", arguments(id(description = "The id of the recipe")))]
     fn recipe(&self, id: Uuid) -> Recipe {
         Recipe::default()
     }

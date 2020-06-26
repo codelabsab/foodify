@@ -2,15 +2,13 @@
 #[macro_use]
 extern crate slog;
 
-mod setup_server;
-mod query;
-mod recipe;
 mod print_banner;
+mod server;
 
-use setup_server::setup_server;
+use crate::server::setup_server;
 use sloggers::terminal::TerminalLoggerBuilder;
 use sloggers::Build;
-use print_banner::print_banner;
+use crate::print_banner::print_banner;
 
 #[tokio::main]
 async fn main() -> Result<(), ()> {
@@ -20,7 +18,7 @@ async fn main() -> Result<(), ()> {
 
     print_banner();
 
-    info!(logger, "Starting recipe API ⭐️");
+    info!(logger, "Starting Recipe API ⭐️");
 
     setup_server(&logger).await;
 
