@@ -1,0 +1,28 @@
+kind: Module
+name: web
+type: container
+hotReload:
+  sync:
+    - source: src
+      target: /site/src
+    - source: static
+      target: /site/static
+services:
+  - name: web
+    ingresses:
+      - path: /
+        port: http
+    ports:
+      - name: http
+        containerPort: 8000
+    volumes:
+      - name: src
+        hostPath: "./src"
+        containerPath: /site/src
+      - name: static
+        hostPath: "./static"
+        containerPath: /site/static
+    healthCheck:
+      httpGet:
+        path: /
+        port: http

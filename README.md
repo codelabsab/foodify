@@ -8,7 +8,7 @@
 # Prerequisites
 
 ## Docker Desktop
-The easiest way to have a docker demon running and to set up a local kubernetes cluster is by using docker desktop. You 
+The easiest way to have a docker demon running and to set up a local kubernetes cluster is by using docker desktop. You
 can find installation instructions at their website.
 
 [Install Docker Desktop](https://docs.docker.com/docker-for-mac/install/)
@@ -19,14 +19,14 @@ Remember to enable the kubernetes addon once docker desktop is installed.
 
 ## Garden
 
-Garden is a tool used for managing our cluster. It also allows for rapid local prototyping. Please see their docs on 
+Garden is a tool used for managing our cluster. It also allows for rapid local prototyping. Please see their docs on
 how to install.
 
 [Installing Garden](https://docs.garden.io/basics/installation)
 
 ## Rust - Optional
 
-You don't need Rust in order to get things running. But its **highly recommended** that you have it installed in order 
+You don't need Rust in order to get things running. But its **highly recommended** that you have it installed in order
 to ease debugging and development. The recommended way is to install rust though the tool rustup.
 
 [Install Rustup](https://rustup.rs/)
@@ -43,15 +43,15 @@ All you need to do is to run the command below and garden will do all the setup 
 garden dev
 ```
 
-This command will automatically discover your local kubernetes cluster and then deploy all our resources on it, cool 
-huh! Once everything is running (might take a while on first run) you can access the graphql playground at 
-[http://foodify.local.app.garden/](http://foodify.local.app.garden/), and grafana at 
-[http://foodify.local.app.garden/grafana](http://foodify.local.app.garden/grafana). Garden will track your files and 
+This command will automatically discover your local kubernetes cluster and then deploy all our resources on it, cool
+huh! Once everything is running (might take a while on first run) you can access the graphql playground at
+[http://foodify.local.app.garden/](http://foodify.local.app.garden/), and grafana at
+[http://foodify.local.app.garden/grafana](http://foodify.local.app.garden/grafana). Garden will track your files and
 rebuild your services when needed.
 
 ## Build code
 
-You can verify that all our rust code builds with this simple command: 
+You can verify that all our rust code builds with this simple command:
 ```shell script
 cargo build
 ```
