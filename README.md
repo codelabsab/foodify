@@ -5,7 +5,8 @@
 </p>
 
 
-# Prerequisites
+# Local development
+Instructions on how to setup a local development environment and start developing! 👨‍💻👩‍💻
 
 ## Docker Desktop
 The easiest way to have a docker demon running and to set up a local kubernetes cluster is by using docker desktop. You
@@ -34,9 +35,9 @@ to ease debugging and development. The recommended way is to install rust though
 Rustup will automatically install the latest stable release ✨
 
 
-# Developing
+## Developing
 
-## Local cluster
+### Local cluster
 
 All you need to do is to run the command below and garden will do all the setup for you
 ```shell script
@@ -49,15 +50,36 @@ huh! Once everything is running (might take a while on first run) you can access
 [http://foodify.local.app.garden/grafana](http://foodify.local.app.garden/grafana). Garden will track your files and
 rebuild your services when needed.
 
-## Build code
+### Build code
 
 You can verify that all our rust code builds with this simple command:
 ```shell script
 cargo build
 ```
 
-## Test code
+### Test code
 You can test the rust code with this command:
 ```shell script
 cargo test
 ```
+
+## Known issues
+
+### Error on `cargo build`
+The error:
+```
+   Updating git repository `https://github.com/graphql-rust/juniper`
+... [output omitted]
+
+Caused by:
+  failed to authenticate when downloading repository
+attempted ssh-agent authentication, but none of the usernames `git` succeeded
+
+Caused by:
+  no authentication available
+```
+The fix:
+```shell script
+CARGO_NET_GIT_FETCH_WITH_CLI=true cargo build
+```
+Reference: https://github.com/rust-lang/cargo/issues/2078
