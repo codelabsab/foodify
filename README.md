@@ -8,7 +8,9 @@
 # Local development
 Instructions on how to setup a local development environment and start developing! 👨‍💻👩‍💻
 
-## Docker Desktop
+## Setup
+
+### Docker Desktop
 The easiest way to have a docker demon running and to set up a local kubernetes cluster is by using docker desktop. You
 can find installation instructions at their website.
 
@@ -18,14 +20,14 @@ Remember to enable the kubernetes addon once docker desktop is installed.
 
 [How to enable kubernetes](https://www.techrepublic.com/article/how-to-add-kubernetes-support-to-docker-desktop/)
 
-## Garden
+### Garden
 
 Garden is a tool used for managing our cluster. It also allows for rapid local prototyping. Please see their docs on
 how to install.
 
 [Installing Garden](https://docs.garden.io/getting-started/1-installation)
 
-## Rust - Optional
+### Rust - Optional
 
 You don't need Rust in order to get things running. But its **highly recommended** that you have it installed in order
 to ease debugging and development. The recommended way is to install rust though the tool rustup.
