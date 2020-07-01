@@ -22,7 +22,7 @@ Remember to enable the kubernetes addon once docker desktop is installed.
 Garden is a tool used for managing our cluster. It also allows for rapid local prototyping. Please see their docs on
 how to install.
 
-[Installing Garden](https://docs.garden.io/basics/installation)
+[Installing Garden](https://docs.garden.io/getting-started/1-installation)
 
 ## Rust - Optional
 
