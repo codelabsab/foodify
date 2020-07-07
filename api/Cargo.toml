@@ -1,0 +1,23 @@
+[package]
+name = "api"
+version = "0.1.0"
+authors = ["Joatin Granlund <joatin.granlund@codelabs.se>"]
+edition = "2018"
+
+
+[dependencies]
+async-graphql = "1.16"
+async-graphql-warp = "1.14.9"
+tokio = { version = "0.2", features = ["macros", "time"] }
+warp = "0.2"
+http = "0.2"
+slog = "2.5.2"
+sloggers = "1.0.1"
+futures = "0.3.5"
+failure = "0.1.8"
+uuid = "0.8.1"
+tonic = "0.2"
+prost = "0.6"
+
+[build-dependencies]
+tonic-build = "0.2"

@@ -1,9 +1,0 @@
-kind: Module
-name: firestore-emulator
-disabled: ${ environment.name != 'local' }
-type: container
-services:
-  - name: firestore-emulator
-    ports:
-      - name: http
-        containerPort: 8080

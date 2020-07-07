@@ -1,0 +1,14 @@
+index 022fa65..6d4ae33 100644
+--- src/lib.rs
++++ src/lib.rs
+@@ -73,8 +73,8 @@ mod generated {
+
+ #[cfg(not(feature = "force_unix_path_separator"))]
+ mod generated {
+-    include!(env!("TYPENUM_BUILD_OP"));
+-    include!(env!("TYPENUM_BUILD_CONSTS"));
++  include!(concat!(env!("OUT_DIR"), "/op.rs"));
++  include!(concat!(env!("OUT_DIR"), "/consts.rs"));
+ }
+
+ pub mod bit;

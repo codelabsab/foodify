@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "foodify-281512",
+  "private_key_id": "d902fcce0983b7c0cd281ee1e5f0363fbdd9bd44",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDHr1Q8pFZXPC9m\nRba4P0kbjh2eqmmEpI824fDCjGKtno7nEUAum8f85z8XQBuwoKjDWPXrrDIhqUiB\nZ6LIhrMjMEZIMZwv8IkCfceTnHnA9yN3/MMP8Epr4dZPV4L0EuK8B9osPy1Yl3f1\n+MzlWGi3u7m4ECOdEWw3t3TI1oSCVM5ZcRyd2Xh3veWSywBd+msWCSDn/BVFm3J3\nm6bSLtsG+zJa1KdNd5Z7uTFLVRGT3hEqnO+PVnqDE7HeHQjAPVkRzCG5pyR3t4n4\ntnbbYB20Wchz8/rPQ3Sdxd/mLGXqGT815SY6VGc8+8EfmIN/zIZ4A/M7GeeQFQ5S\nxyauhaTTAgMBAAECggEAChtIoy0aJZ4pM/7xSZACbj+aJi6v2oPNr9RtsBsU3363\n8t//pJxD2fwGSHH5NM5c3E5DXCNCAkwkHFCXf5i5tl06IWtJYW/GL3cYQ9NWojqf\n8/G6GbNqwN0UUL24JgxSp3uqQjUMYYCBFNT74dvAqRP6SWOfudJo7MT/Ry78U/BJ\n7dktDF/GEoG1rSPeHI1/x0zva1slMdrCfSBbrDi1cdgM+JZjJ7t2doJvp5ydsdzn\n2Q2YTtaQe6DZYFOdK18ocTZekmRX0aCbiuMcMe21+BIjmFXmlOIdWJjyvekD6qbb\n9EobICrazwloowUuKKG6gZSBQF36y/pcYEu7yM6b2QKBgQD1zhydjuil+vNFPDdX\ndBjG8aCfDENc+gjGiwX4eOk71iyqm/dfMWjEhItaJHoJHssrepUJUJ/YgSplmYRz\nRxCsT9WBs3NYQmrn4aCHbxJLYN7ZtN+/hc9mmzSEg7lQVhu1FARZrSpHVwFrk72+\n6Qj8DX5hWb7/R9FM7otNZoYlRwKBgQDP94aXykQQIZVvuj+/asyLxPX/GJJR4TmU\n208AWCl6Qb9q6KrTtzcrVwrJ81tbT0mPyp+G0b9oCCMaoPqjmRnbk4RDgYokz59u\npr222TWsN4iKr9YvzdZcrUNhfhkbn6leXF/hIwvLoM83far7F1nzRwTZgvLIBmtl\nzrsvwZm6FQKBgQCX1jkA7r0xgmHxm6/H2tRPWATTGn0mGuF+23PVt8LDDprKzMsy\nx0+jTQjTpwKnTZlNA0y6003aLHenCPyzROu8tRf7JYGTvHtTP6Gs52SSoYUnUD6C\njUK/bBI15TR8tqQo5/OD/Z7HMKyU6k9kdYjyQdeWhRyhjphwgE4WgsVMkwKBgFIn\nJNsXgtWgfqjZOU+Df/QCxW6VJVAFGbsM+2NWcGQkTtqLuNfTu456Xv+yC7fBVXzg\n/S3D88nD1SIyz3ALDeTonEoShSDPh9qtMapmmcZDVcP7fC/8Lx8DLuf3aTG5W62z\n7ghA0OsKxnDUStPPwK/SsT6/dOrBZnGcPeO6peCVAoGAaem6whwmUNXu0yeI7Njq\nB0dhq+5DtOxMIKj8yR1ybF067PTBLeVYFOGb4as94ZhpzTazVnHR8Wf1Xi/k2dqZ\ntatP2a0MeF133a8NNsCuAeHmokkWvtNd1UQ2pC9akmzOzLgZ4FFppra7murX9lrK\noMbHkadRB4KYB7tp+ppekQY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "remote-build@foodify-281512.iam.gserviceaccount.com",
+  "client_id": "100642886715221586320",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/remote-build%40foodify-281512.iam.gserviceaccount.com"
+}

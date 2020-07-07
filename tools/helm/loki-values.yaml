@@ -1,0 +1,4 @@
+promtail:
+  enabled: true
+  loki:
+    serviceName: loki

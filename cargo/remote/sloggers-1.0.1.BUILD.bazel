@@ -1,0 +1,58 @@
+"""
+cargo-raze crate build file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+package(default_visibility = [
+  # Public for visibility by "@raze__crate__version//" targets.
+  #
+  # Prefer access through "//cargo", which limits external
+  # visibility to explicit Cargo.toml dependencies.
+  "//visibility:public",
+])
+
+licenses([
+  "notice", # MIT from expression "MIT"
+])
+
+load(
+    "@io_bazel_rules_rust//rust:rust.bzl",
+    "rust_library",
+    "rust_binary",
+    "rust_test",
+)
+
+
+# Unsupported target "hello" with type "example" omitted
+
+rust_library(
+    name = "sloggers",
+    crate_type = "lib",
+    deps = [
+        "@raze__chrono__0_4_13//:chrono",
+        "@raze__libflate__1_0_2//:libflate",
+        "@raze__regex__1_3_9//:regex",
+        "@raze__serde__1_0_114//:serde",
+        "@raze__slog__2_5_2//:slog",
+        "@raze__slog_async__2_5_0//:slog_async",
+        "@raze__slog_kvfilter__0_7_0//:slog_kvfilter",
+        "@raze__slog_scope__4_3_0//:slog_scope",
+        "@raze__slog_stdlog__4_0_0//:slog_stdlog",
+        "@raze__slog_term__2_6_0//:slog_term",
+        "@raze__trackable__1_0_0//:trackable",
+    ],
+    srcs = glob(["**/*.rs"]),
+    crate_root = "src/lib.rs",
+    edition = "2018",
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    version = "1.0.1",
+    tags = ["cargo-raze"],
+    crate_features = [
+        "default",
+        "libflate",
+        "slog-kvfilter",
+    ],
+)
+

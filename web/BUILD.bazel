@@ -1,0 +1,21 @@
+
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+
+nodejs_binary(
+  name = "gatsby",
+  entry_point = "@npm//:node_modules/gatsby-cli/cli.js",
+  data = [
+    "@npm//gatsby-cli",
+    "@npm//gatsby",
+  ]
+)
+
+genrule(
+  name = "web",
+  cmd = "echo \"cd web && ./node_modules/.bin/gatsby serve\" > $(OUTS)",
+  outs = ["serve.sh"],
+  executable = True,
+  tools = [
+    ":gatsby"
+  ]
+)

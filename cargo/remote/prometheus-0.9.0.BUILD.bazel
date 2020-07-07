@@ -1,0 +1,63 @@
+"""
+cargo-raze crate build file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+package(default_visibility = [
+  # Public for visibility by "@raze__crate__version//" targets.
+  #
+  # Prefer access through "//cargo", which limits external
+  # visibility to explicit Cargo.toml dependencies.
+  "//visibility:public",
+])
+
+licenses([
+  "notice", # Apache-2.0 from expression "Apache-2.0"
+])
+
+load(
+    "@io_bazel_rules_rust//rust:rust.bzl",
+    "rust_library",
+    "rust_binary",
+    "rust_test",
+)
+
+
+# Unsupported target "atomic" with type "bench" omitted
+# Unsupported target "build-script-build" with type "custom-build" omitted
+# Unsupported target "counter" with type "bench" omitted
+# Unsupported target "example_custom_registry" with type "example" omitted
+# Unsupported target "example_edition_2018" with type "example" omitted
+# Unsupported target "example_embed" with type "example" omitted
+# Unsupported target "example_hyper" with type "example" omitted
+# Unsupported target "example_int_metrics" with type "example" omitted
+# Unsupported target "example_process_collector" with type "example" omitted
+# Unsupported target "example_push" with type "example" omitted
+# Unsupported target "gauge" with type "bench" omitted
+# Unsupported target "histogram" with type "bench" omitted
+
+rust_library(
+    name = "prometheus",
+    crate_type = "lib",
+    deps = [
+        "@raze__cfg_if__0_1_10//:cfg_if",
+        "@raze__fnv__1_0_7//:fnv",
+        "@raze__lazy_static__1_4_0//:lazy_static",
+        "@raze__protobuf__2_16_2//:protobuf",
+        "@raze__spin__0_5_2//:spin",
+        "@raze__thiserror__1_0_20//:thiserror",
+    ],
+    srcs = glob(["**/*.rs"]),
+    crate_root = "src/lib.rs",
+    edition = "2018",
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    version = "0.9.0",
+    tags = ["cargo-raze"],
+    crate_features = [
+        "default",
+        "protobuf",
+    ],
+)
+

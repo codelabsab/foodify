@@ -2,3 +2,7 @@
 target/
 .garden/
 error.log
+bazel-bin/
+bazel-foodify/
+bazel-out/
+bazel-testlogs/

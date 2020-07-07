@@ -1,0 +1,15 @@
+[package]
+name = "recipe_query"
+version = "0.1.0"
+authors = ["Joatin Granlund <joatin.granlund@codelabs.se>"]
+edition = "2018"
+
+
+[dependencies]
+tokio = { version = "0.2.21", features = ["full"] }
+slog = "2.5.2"
+sloggers = "1.0.1"
+eventific = { git = "https://github.com/Joatin/eventific" }
+eventific_postgres = { git = "https://github.com/Joatin/eventific" }
+recipe_shared = { path = "../shared" }
+futures = "0.3.5"

@@ -17,16 +17,23 @@ Remember to enable the kubernetes addon once docker desktop is installed.
 
 [How to enable kubernetes](https://www.techrepublic.com/article/how-to-add-kubernetes-support-to-docker-desktop/)
 
-## Garden
+## Bazel
 
-Garden is a tool used for managing our cluster. It also allows for rapid local prototyping. Please see their docs on
-how to install.
+Bazel is the build orchestrator used to build this project, their slogan is "Fast Correct, choose two", and it's a
+pretty good one since Bazel is crazy fast. Thanks to its strict dependency tracking it can do some heavy caching which
+speeds up builds tremendously.
 
-[Installing Garden](https://docs.garden.io/basics/installation)
+[Installing Bazel](https://docs.bazel.build/versions/master/install.html)
+
+If you are using Mac OSX I would recommend using Homebrew.
+
+```shell script
+brew install bazel
+```
 
 ## Rust - Optional
 
-You don't need Rust in order to get things running. But its **highly recommended** that you have it installed in order
+You don't need Rust in order to get things running. Bazel will bundle its own version of rust for its builds. But its **highly recommended** that you have it installed in order
 to ease debugging and development. The recommended way is to install rust though the tool rustup.
 
 [Install Rustup](https://rustup.rs/)
@@ -38,9 +45,10 @@ Rustup will automatically install the latest stable release ✨
 
 ## Local cluster
 
-All you need to do is to run the command below and garden will do all the setup for you
+To get started with a fresh cluster you must first install our CRDs needed later on. Given you have Bazel installed you
+can just run the following command:
 ```shell script
-garden dev
+bazel run //:crd.apply
 ```
 
 This command will automatically discover your local kubernetes cluster and then deploy all our resources on it, cool

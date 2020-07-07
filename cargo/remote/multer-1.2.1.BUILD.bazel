@@ -1,0 +1,64 @@
+"""
+cargo-raze crate build file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+package(default_visibility = [
+  # Public for visibility by "@raze__crate__version//" targets.
+  #
+  # Prefer access through "//cargo", which limits external
+  # visibility to explicit Cargo.toml dependencies.
+  "//visibility:public",
+])
+
+licenses([
+  "notice", # MIT from expression "MIT"
+])
+
+load(
+    "@io_bazel_rules_rust//rust:rust.bzl",
+    "rust_library",
+    "rust_binary",
+    "rust_test",
+)
+
+
+# Unsupported target "hyper_server_example" with type "example" omitted
+# Unsupported target "integration" with type "test" omitted
+
+rust_library(
+    name = "multer",
+    crate_type = "lib",
+    deps = [
+        "@raze__bytes__0_5_5//:bytes",
+        "@raze__encoding_rs__0_8_23//:encoding_rs",
+        "@raze__futures__0_3_5//:futures",
+        "@raze__http__0_2_1//:http",
+        "@raze__httparse__1_3_4//:httparse",
+        "@raze__lazy_static__1_4_0//:lazy_static",
+        "@raze__log__0_4_8//:log",
+        "@raze__mime__0_3_16//:mime",
+        "@raze__regex__1_3_9//:regex",
+        "@raze__twoway__0_2_1//:twoway",
+    ],
+    srcs = glob(["**/*.rs"]),
+    crate_root = "src/lib.rs",
+    edition = "2018",
+    proc_macro_deps = [
+        "@raze__derive_more__0_99_9//:derive_more",
+    ],
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    version = "1.2.1",
+    tags = ["cargo-raze"],
+    crate_features = [
+        "default",
+    ],
+)
+
+# Unsupported target "parse_async_read" with type "example" omitted
+# Unsupported target "prevent_ddos_attack" with type "example" omitted
+# Unsupported target "routerify_example" with type "example" omitted
+# Unsupported target "simple_example" with type "example" omitted
+# Unsupported target "test" with type "example" omitted

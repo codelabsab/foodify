@@ -1,0 +1,11 @@
+--- build.rs
++++ build.rs
+@@ -46,7 +46,7 @@
+ }
+
+ fn version() -> String {
+-    env::var("CARGO_PKG_VERSION").expect("CARGO_PKG_VERSION")
++    "2.16.1".to_string()
+ }
+
+ fn write_version() {

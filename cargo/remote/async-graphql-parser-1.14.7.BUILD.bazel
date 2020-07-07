@@ -1,0 +1,51 @@
+"""
+cargo-raze crate build file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+package(default_visibility = [
+  # Public for visibility by "@raze__crate__version//" targets.
+  #
+  # Prefer access through "//cargo", which limits external
+  # visibility to explicit Cargo.toml dependencies.
+  "//visibility:public",
+])
+
+licenses([
+  "notice", # MIT from expression "MIT OR Apache-2.0"
+])
+
+load(
+    "@io_bazel_rules_rust//rust:rust.bzl",
+    "rust_library",
+    "rust_binary",
+    "rust_test",
+)
+
+
+
+rust_library(
+    name = "async_graphql_parser",
+    crate_type = "lib",
+    deps = [
+        "@raze__arrayvec__0_5_1//:arrayvec",
+        "@raze__pest__2_1_3//:pest",
+        "@raze__serde_json__1_0_56//:serde_json",
+        "@raze__thiserror__1_0_20//:thiserror",
+    ],
+    srcs = glob(["**/*.rs"]),
+    crate_root = "src/lib.rs",
+    edition = "2018",
+    proc_macro_deps = [
+        "@raze__pest_derive__2_1_0//:pest_derive",
+    ],
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    data = glob(["**/*.pest"]),
+    version = "1.14.7",
+    tags = ["cargo-raze"],
+    crate_features = [
+    ],
+)
+

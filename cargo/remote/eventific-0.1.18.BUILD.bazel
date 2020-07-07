@@ -1,0 +1,62 @@
+"""
+cargo-raze crate build file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+package(default_visibility = [
+  # Public for visibility by "@raze__crate__version//" targets.
+  #
+  # Prefer access through "//cargo", which limits external
+  # visibility to explicit Cargo.toml dependencies.
+  "//visibility:public",
+])
+
+licenses([
+  "notice", # MIT from expression "MIT"
+])
+
+load(
+    "@io_bazel_rules_rust//rust:rust.bzl",
+    "rust_library",
+    "rust_binary",
+    "rust_test",
+)
+
+
+# Unsupported target "basic_setup" with type "example" omitted
+
+rust_library(
+    name = "eventific",
+    crate_type = "lib",
+    deps = [
+        "@raze__chrono__0_4_13//:chrono",
+        "@raze__colored__1_9_3//:colored",
+        "@raze__failure__0_1_8//:failure",
+        "@raze__futures__0_3_5//:futures",
+        "@raze__hyper__0_13_6//:hyper",
+        "@raze__lazy_static__1_4_0//:lazy_static",
+        "@raze__prometheus__0_9_0//:prometheus",
+        "@raze__serde__1_0_114//:serde",
+        "@raze__slog__2_5_2//:slog",
+        "@raze__strum__0_18_0//:strum",
+        "@raze__tokio__0_2_21//:tokio",
+        "@raze__uuid__0_8_1//:uuid",
+    ],
+    srcs = glob(["**/*.rs"]),
+    crate_root = "eventific/src/lib.rs",
+    edition = "2018",
+    proc_macro_deps = [
+        "@raze__serde_derive__1_0_114//:serde_derive",
+    ],
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    version = "0.1.18",
+    tags = ["cargo-raze"],
+    crate_features = [
+    ],
+)
+
+# Unsupported target "grpc" with type "example" omitted
+# Unsupported target "listening_for_updates" with type "example" omitted
+# Unsupported target "playground" with type "example" omitted

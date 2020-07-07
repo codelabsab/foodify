@@ -1,0 +1,105 @@
+"""
+cargo-raze workspace build file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+package(default_visibility = ["//visibility:public"])
+
+licenses([
+  "notice" # See individual crates for specific licenses
+])
+alias(
+    name = "async_graphql",
+    actual = "@raze__async_graphql__1_16_5//:async_graphql",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "async_graphql_warp",
+    actual = "@raze__async_graphql_warp__1_16_4//:async_graphql_warp",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "eventific",
+    actual = "@raze__eventific__0_1_18//:eventific",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "eventific_postgres",
+    actual = "@raze__eventific_postgres__0_1_3//:eventific_postgres",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "failure",
+    actual = "@raze__failure__0_1_8//:failure",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "futures",
+    actual = "@raze__futures__0_3_5//:futures",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "http",
+    actual = "@raze__http__0_2_1//:http",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "libc",
+    actual = "@raze__libc__0_2_71//:libc",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "prost",
+    actual = "@raze__prost__0_6_1//:prost",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "serde",
+    actual = "@raze__serde__1_0_114//:serde",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "slog",
+    actual = "@raze__slog__2_5_2//:slog",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "sloggers",
+    actual = "@raze__sloggers__1_0_1//:sloggers",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "strum",
+    actual = "@raze__strum__0_18_0//:strum",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "strum_macros",
+    actual = "@raze__strum_macros__0_18_0//:strum_macros",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "tokio",
+    actual = "@raze__tokio__0_2_21//:tokio",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "tonic",
+    actual = "@raze__tonic__0_2_1//:tonic",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "tonic_build",
+    actual = "@raze__tonic_build__0_2_0//:tonic_build",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "uuid",
+    actual = "@raze__uuid__0_8_1//:uuid",
+    tags = ["cargo-raze"],
+)
+alias(
+    name = "warp",
+    actual = "@raze__warp__0_2_3//:warp",
+    tags = ["cargo-raze"],
+)

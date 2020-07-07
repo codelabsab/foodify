@@ -1,0 +1,20 @@
+package(default_visibility = ["//visibility:private"])
+
+load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
+load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
+
+
+k8s_object(
+  name = "prometheus",
+  kind = "deployment",
+  template = "prometheus.yaml",
+  cluster = "docker-desktop"
+)
+
+k8s_objects(
+  name = "crd",
+  objects = [
+    ":prometheus",
+  ],
+  visibility = ["//visibility:public"]
+)

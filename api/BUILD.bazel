@@ -1,0 +1,57 @@
+package(default_visibility = ["//visibility:private"])
+
+load("@io_bazel_rules_docker//rust:image.bzl", "rust_image")
+load("@io_bazel_rules_rust//cargo:cargo_build_script.bzl", "cargo_build_script")
+load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
+load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
+
+cargo_build_script(
+    name = "build_script",
+    srcs = ["build.rs"],
+    data = ["//recipe:proto"],
+    deps = [
+      "@com_google_protobuf//:protoc",
+      "@com_google_protobuf//:protoc_lib",
+      "//cargo:tonic_build",
+    ],
+)
+
+rust_image(
+    name = "image",
+    srcs = glob(["src/**/*"]),
+    edition = "2018",
+    deps = [
+      ":build_script",
+      "//cargo:async_graphql",
+      "//cargo:async_graphql_warp",
+      "//cargo:tokio",
+      "//cargo:warp",
+      "//cargo:http",
+      "//cargo:slog",
+      "//cargo:sloggers",
+      "//cargo:futures",
+      "//cargo:failure",
+      "//cargo:uuid",
+      "//cargo:tonic",
+      "//cargo:prost",
+    ],
+    visibility = ["//visibility:public"]
+)
+
+k8s_object(
+  name = "deployment",
+  kind = "deployment",
+  template = "deployment.yaml",
+  images = {
+    "eu.gcr.io/foodify-281512/api:latest": ":image"
+  },
+  cluster = "docker-desktop"
+)
+
+k8s_objects(
+  name = "api",
+  objects = [
+    ":deployment",
+  ],
+  visibility = ["//visibility:public"]
+)

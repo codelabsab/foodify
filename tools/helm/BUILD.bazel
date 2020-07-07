@@ -1,0 +1,80 @@
+package(default_visibility = ["//tools:__pkg__"])
+
+load("@dataform//tools/helm:helm_template.bzl", "helm_template")
+load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
+load("@io_bazel_rules_k8s//k8s:objects.bzl", "k8s_objects")
+
+helm_template(
+  name = "prometheus",
+  chart_tar = "@prometheus//:chart.tgz",
+  values_yaml_file = ":prometheus-values.yaml"
+)
+
+k8s_object(
+  name = "prometheus_k8s",
+  kind = "deployment",
+  template = ":prometheus",
+  cluster = "docker-desktop"
+)
+
+helm_template(
+  name = "loki",
+  chart_tar = "@loki//:chart.tgz",
+  values_yaml_file = ":loki-values.yaml"
+)
+
+k8s_object(
+  name = "loki_k8s",
+  kind = "deployment",
+  template = ":loki",
+  cluster = "docker-desktop"
+)
+
+helm_template(
+  name = "elasticsearch",
+  chart_tar = "@elasticsearch//:chart.tgz"
+)
+
+k8s_object(
+  name = "elasticsearch_k8s",
+  kind = "deployment",
+  template = ":elasticsearch",
+  cluster = "docker-desktop"
+)
+
+helm_template(
+  name = "kafka",
+  chart_tar = "@kafka//:chart.tgz"
+)
+
+k8s_object(
+  name = "kafka_k8s",
+  kind = "deployment",
+  template = ":kafka",
+  cluster = "docker-desktop"
+)
+
+helm_template(
+  name = "postgres",
+  chart_tar = "@postgres//:chart.tgz",
+  values_yaml_file = ":postgres-values.yaml"
+)
+
+k8s_object(
+  name = "postgres_k8s",
+  kind = "deployment",
+  template = ":postgres",
+  cluster = "docker-desktop"
+)
+
+k8s_objects(
+  name = "helm",
+  objects = [
+    ":prometheus_k8s",
+    ":loki_k8s",
+    ":elasticsearch_k8s",
+    ":kafka_k8s",
+    ":postgres_k8s",
+  ],
+  visibility = ["//visibility:public"]
+)

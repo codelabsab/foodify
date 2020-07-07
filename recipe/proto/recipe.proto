@@ -1,0 +1,15 @@
+syntax = "proto3";
+package recipe;
+
+
+service Recipe {
+  rpc CreateRecipe (CreateRecipeRequest) returns (CreateRecipeReply);
+}
+
+message CreateRecipeRequest {
+  string aggregate_id = 1;
+}
+
+message CreateRecipeReply {
+  bool success = 1;
+}

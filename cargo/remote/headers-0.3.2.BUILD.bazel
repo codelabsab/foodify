@@ -1,0 +1,51 @@
+"""
+cargo-raze crate build file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+package(default_visibility = [
+  # Public for visibility by "@raze__crate__version//" targets.
+  #
+  # Prefer access through "//cargo", which limits external
+  # visibility to explicit Cargo.toml dependencies.
+  "//visibility:public",
+])
+
+licenses([
+  "notice", # MIT from expression "MIT"
+])
+
+load(
+    "@io_bazel_rules_rust//rust:rust.bzl",
+    "rust_library",
+    "rust_binary",
+    "rust_test",
+)
+
+
+
+rust_library(
+    name = "headers",
+    crate_type = "lib",
+    deps = [
+        "@raze__base64__0_12_3//:base64",
+        "@raze__bitflags__1_2_1//:bitflags",
+        "@raze__bytes__0_5_5//:bytes",
+        "@raze__headers_core__0_2_0//:headers_core",
+        "@raze__http__0_2_1//:http",
+        "@raze__mime__0_3_16//:mime",
+        "@raze__sha_1__0_8_2//:sha_1",
+        "@raze__time__0_1_43//:time",
+    ],
+    srcs = glob(["**/*.rs"]),
+    crate_root = "src/lib.rs",
+    edition = "2015",
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    version = "0.3.2",
+    tags = ["cargo-raze"],
+    crate_features = [
+    ],
+)
+

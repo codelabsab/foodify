@@ -1,0 +1,13 @@
+grafana:
+  enabled: false
+  prometheus:
+    prometheusSpec:
+      serviceMonitorSelectorNilUsesHelmValues: true
+    additionalServiceMonitors:
+      - name: grafana
+        endpoints:
+          - port: web
+            interval: 5s
+        selector:
+          matchLabels:
+            service: grafana

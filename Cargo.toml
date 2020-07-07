@@ -1,5 +1,13 @@
 [workspace]
 
 members = [
+    "api",
     "recipe_api",
+    "recipe/command",
+    "recipe/query",
+    "recipe/shared",
+    "cargo"
+]
+exclude = [
+  "cargo"
 ]

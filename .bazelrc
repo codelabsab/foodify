@@ -1,0 +1,10 @@
+build:docker --extra_toolchains=@llvm_toolchain//:cc-toolchain-linux
+build:docker --extra_toolchains=@llvm_toolchain//:cc-toolchain-darwin
+build:docker --extra_toolchains=@extra_toolchains//:toolchain_for_x86_64-unknown-linux-gnu
+build:docker --platforms=//:linux
+build:docker --incompatible_enable_cc_toolchain_resolution
+
+build:docker-sandbox --spawn_strategy=docker --strategy=Javac=docker --genrule_strategy=docker
+build:docker-sandbox --experimental_docker_verbose
+build:docker-sandbox --experimental_enable_docker_sandbox
+build:docker-sandbox --experimental_docker_image=rbe-ubuntu16-04
