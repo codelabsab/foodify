@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import {graphql, Link, StaticQuery} from "gatsby";
+import {withAuth0, WithAuth0Props} from "@auth0/auth0-react";
 
 import styles from './Header.module.scss';
-import {graphql, Link, StaticQuery} from "gatsby";
 
 const query = graphql`
   query Header {
@@ -16,7 +17,7 @@ const query = graphql`
   }
 `
 
-export default class Header extends Component {
+class Header extends Component<WithAuth0Props> {
 
     public render() {
         return (
@@ -37,16 +38,36 @@ export default class Header extends Component {
                     )
                   }) }
                   <div className={styles.spacer} />
-                  <Link to={'/404'} className={styles.item}>
-                    <span>Sign Up</span>
-                  </Link>
-                  <Link to={'/404'} className={styles.item}>
-                    <span>Log In</span>
-                  </Link>
+                  { !this.props.auth0.isAuthenticated && this.renderLoginItems() }
+                  { this.props.auth0.isAuthenticated && this.renderProfileTab() }
                 </div>
               )
             }} />
           </>
         )
     }
+
+    renderLoginItems = () => {
+      return (
+        <>
+          <Link to={'/404'} className={styles.item}>
+            <span>Sign Up</span>
+          </Link>
+          <button onClick={() => this.props.auth0.loginWithRedirect()} className={styles.item}>
+            <span>Log In</span>
+          </button>
+        </>
+      );
+    }
+
+    renderProfileTab = () => {
+      console.log(this.props.auth0.user)
+      return (
+        <button onClick={() => {}} className={styles.item}>
+          <span>{this.props.auth0.user.given_name}</span>
+        </button>
+      );
+    }
 }
+
+export default withAuth0(Header)

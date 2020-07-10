@@ -41,6 +41,15 @@ Rustup will automatically install the latest stable release ✨
 
 ### Local cluster
 
+*Note:* Due to restrictions on how Helm a Kubernetes works, the CRDs for prometheus needs to be deployed first. You can
+do that with this command:
+```shell script
+kubectl apply -f tools/crd/prometheus.yaml
+```
+You only have to do this once when you have a fresh cluster.
+
+#### Garden
+
 All you need to do is to run the command below and garden will do all the setup for you
 ```shell script
 garden dev
@@ -52,8 +61,16 @@ huh! Once everything is running (might take a while on first run) you can access
 [http://foodify.local.app.garden/grafana](http://foodify.local.app.garden/grafana). Garden will track your files and
 rebuild your services when needed.
 
-### Build code
+## Seed data base
 
+A bad thing right now is that you will have no data at all in our cluster. But worry, Le Chef to the rescue. He is a
+five star master chef powered by AI. Just run the command bellow and watch him do his thing.
+
+```shell script
+cargo run --bin le_chef
+```
+
+## Build code
 You can verify that all our rust code builds with this simple command:
 ```shell script
 cargo build

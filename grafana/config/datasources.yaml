@@ -11,7 +11,28 @@ datasources:
   - name: Loki
     type: loki
     access: proxy
-    orgId: 3
+    orgId: 2
     url: http://loki:3100
     isDefault: false
     editable: false
+  - name: Postgres
+    type: postgres
+    access: proxy
+    orgId: 3
+    url: postgres-postgresql:5432
+    database: postgres
+    user: postgres
+    secureJsonData:
+      password: password
+    jsonData:
+      tlsAuth: false
+      tlsSkipVerify: true
+      sslmode: disable
+    isDefault: false
+    editable: false
+  - name: Elasticsearch
+    type: elasticsearch
+    access: proxy
+    orgId: 4
+    url: elasticsearch-elasticsearch-master:9200
+

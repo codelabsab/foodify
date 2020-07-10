@@ -1,0 +1,13 @@
+[package]
+name = "recipe_shared"
+version = "0.1.0"
+authors = ["Joatin Granlund <joatin.granlund@codelabs.se>"]
+edition = "2018"
+
+[dependencies]
+eventific = { git = "https://github.com/Joatin/eventific" }
+strum = "0.18.0"
+strum_macros = "0.18.0"
+serde = "1.0"
+uuid = "0.8.1"
+chrono = "0.4.13"

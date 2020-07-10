@@ -12,11 +12,12 @@ $layout-content-width: 960px;
 .contentFluid {
   @extend .content;
   margin: 0;
+  width: 100%;
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  min-height: 100vh;
   height: 100%;
 }

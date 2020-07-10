@@ -1,0 +1,15 @@
+kind: Module
+name: kafdrop
+type: container
+image: obsidiandynamics/kafdrop
+services:
+  - name: kafdrop
+    env:
+      KAFKA_BROKERCONNECT: "kafka:9092"
+    ports:
+      - name: http
+        containerPort: 9000
+    healthCheck:
+      httpGet:
+        port: http
+        path: /

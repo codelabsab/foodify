@@ -1,6 +1,7 @@
 kind: Module
 name: web
 type: container
+disabled: true
 hotReload:
   sync:
     - source: src
@@ -9,9 +10,6 @@ hotReload:
       target: /site/static
 services:
   - name: web
-    ingresses:
-      - path: /
-        port: http
     ports:
       - name: http
         containerPort: 8000

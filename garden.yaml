@@ -41,3 +41,103 @@ values:
     enabled: true
     loki:
       serviceName: loki
+---
+kind: Module
+description: Postgresql stores our event log
+type: helm
+name: postgres
+repo: https://charts.bitnami.com/bitnami
+chart: postgresql
+version: "8.10.14"
+values:
+  postgresqlDatabase: postgres
+  postgresqlUsername: user
+  postgresqlPassword: password
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+---
+kind: Module
+description: Elastic Search stores our views
+type: helm
+name: elasticsearch
+repo: https://charts.bitnami.com/bitnami
+chart: elasticsearch
+version: "12.5.1"
+---
+kind: Module
+description: Kafka passes messages
+type: helm
+name: kafka
+repo: https://charts.bitnami.com/bitnami
+chart: kafka
+version: "11.3.2"
+---
+kind: Module
+name: recipe-command
+type: container
+dockerfile: Dockerfile
+build:
+  targetImage: recipe_command
+services:
+  - name: recipe-command
+    dependencies:
+      - postgres
+    env:
+      POSTGRES_URI: "postgres://user:password@postgres-postgresql:5432/postgres"
+      KAFKA_URI: "kafka:9092"
+    ports:
+      - name: grpc
+        containerPort: 4071
+      - name: http
+        containerPort: 9000
+    healthCheck:
+      httpGet:
+        port: http
+        path: /health
+---
+kind: Module
+name: recipe-query
+type: container
+dockerfile: Dockerfile
+build:
+  targetImage: recipe_query
+services:
+  - name: recipe-query
+    dependencies:
+      - postgres
+    env:
+      POSTGRES_URI: "postgres://user:password@postgres-postgresql:5432/postgres"
+      KAFKA_URI: "kafka:9092"
+      ELASTIC_SEARCH_URI: "http://elasticsearch-elasticsearch-master:9200"
+    ports:
+      - name: http
+        containerPort: 9000
+    healthCheck:
+      httpGet:
+        port: http
+        path: /health
+---
+kind: Module
+name: api
+type: container
+dockerfile: Dockerfile
+build:
+  targetImage: api
+services:
+  - name: api
+    ingresses:
+      - path: /api
+        port: http
+    env:
+      ELASTIC_SEARCH_URI: "http://elasticsearch-elasticsearch-master:9200"
+    dependencies:
+      - recipe-command
+    ports:
+      - name: http
+        containerPort: 9000
+    healthCheck:
+      httpGet:
+        port: http
+        path: /api

@@ -1,0 +1,35 @@
+syntax = "proto3";
+package recipe;
+
+
+service Recipe {
+  rpc CreateRecipe (CreateRecipeRequest) returns (CommandReply);
+  rpc SetDescription(SetDescriptionRequest) returns (CommandReply);
+  rpc SetBriefDescription(SetBriefDescriptionRequest) returns (CommandReply);
+}
+
+message CommandReply {
+  bool success = 1;
+}
+
+message MetaInfo {
+  string user_id = 1;
+}
+
+message CreateRecipeRequest {
+  MetaInfo info = 1;
+  string aggregate_id = 2;
+  string title = 3;
+}
+
+message SetDescriptionRequest {
+  MetaInfo info = 1;
+  string aggregate_id = 2;
+  string description = 3;
+}
+
+message SetBriefDescriptionRequest {
+  MetaInfo info = 1;
+  string aggregate_id = 2;
+  string description = 3;
+}

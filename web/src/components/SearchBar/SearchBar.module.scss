@@ -1,0 +1,67 @@
+
+$input-height: 4em;
+
+.searchBar {
+  margin: 4em 0;
+}
+
+.inputWrapper {
+  flex: 1 1;
+  background-color: white;
+  height: $input-height;
+  border-radius: $input-height / 2;
+  border: .2em solid gray;
+  transition: border .2s ease-out;
+  position: relative;
+  overflow: hidden;
+
+  &:focus-within {
+    border: .2em solid pink;
+  }
+
+
+  & > input {
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    padding: 0 1.2em;
+    font-size: 2em;
+    color: #4c4c4c;
+
+    &::placeholder {
+      font-weight: 100;
+      color: #ababab;
+    }
+  }
+}
+
+.searchRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.results {
+  display: flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 6em;
+  flex-direction: column;
+  justify-content: center;
+  pointer-events: none;
+  color: #ababab;
+
+}
+
+.titleRow {
+  margin-bottom: 4em;
+
+  & > h1 {
+    font-size: 2.5em;
+    color: #4c4c4c;
+    margin: 0;
+  }
+}

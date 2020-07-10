@@ -16,6 +16,7 @@ $header-margin-bottom: 1em;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 100;
 }
 
 .placeholder {
@@ -30,6 +31,10 @@ $header-margin-bottom: 1em;
   padding: 0 2em;
   transition: background-color .2s ease;
   text-decoration: none;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
 
   &:hover {
     background-color: lighten($header-background-color, 7%);

@@ -15,11 +15,11 @@ module.exports = {
     menuItems: [
       {
         title: "Discover",
-        to: "/recipes"
+        to: "/discover"
       },
       {
-        title: "Recipes",
-        to: "/recipes"
+        title: "Find",
+        to: "/find"
       },
       {
         title: "About",
@@ -28,6 +28,17 @@ module.exports = {
     ]
   },
   plugins: [
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        // Arbitrary name for the remote schema Query type
+        typeName: "FOODIFY",
+        // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
+        fieldName: "foodify",
+        // Url to query from
+        url: "http://foodify.local.app.garden/api",
+      },
+    },
     `gatsby-plugin-sass`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -40,3 +51,4 @@ module.exports = {
     `gatsby-plugin-sharp`
   ],
 }
+

@@ -1,5 +1,9 @@
 [workspace]
 
 members = [
-    "recipe_api",
+    "api",
+    "recipe/command",
+    "recipe/query",
+    "recipe/shared",
+    "le_chef"
 ]

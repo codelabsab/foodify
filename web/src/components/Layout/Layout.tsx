@@ -3,6 +3,7 @@ import Seo, {SeoProps} from "../Seo";
 import Header from "../Header/Header";
 
 import styles from './Layout.module.scss';
+import Footer from "../Footer/Footer";
 
 export interface LayoutProps extends SeoProps {
   fluid?: boolean;
@@ -20,6 +21,7 @@ export default class Layout extends Component<LayoutProps> {
                   <div className={this.props.fluid ? styles.contentFluid : styles.content}>
                       {this.props.children}
                   </div>
+                  <Footer />
                 </div>
             </>
         )

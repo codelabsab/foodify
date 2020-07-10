@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recipe_command-deployment
+  labels:
+    app: recipe_command
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: recipe_command
+  template:
+    metadata:
+      labels:
+        app: recipe_command
+    spec:
+      containers:
+        - name: recipe_command
+          image: recipe_command
+          ports:
+            - containerPort: 3000
