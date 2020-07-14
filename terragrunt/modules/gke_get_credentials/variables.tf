@@ -1,6 +1,6 @@
 variable "region" {
   description = "GCP region used for all resources"
-  default = "europe-north1"
+  default     = "europe-north1"
 }
 
 variable "project_id" {

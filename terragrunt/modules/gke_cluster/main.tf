@@ -32,8 +32,8 @@ resource "google_container_cluster" "gke" {
 
   # Self links in the same resource isn't allowed, hence explicit declaration.
   resource_labels = {
-    name       = "${var.environment}-gke-${random_id.random_id_suffix.hex}"
-    type       = "gke-master"
+    name = "${var.environment}-gke-${random_id.random_id_suffix.hex}"
+    type = "gke-master"
   }
 
   #Adding this block enables IP aliasing, making the cluster VPC-native instead of routes-based.
@@ -99,7 +99,7 @@ resource "google_container_node_pool" "gcc_nodes" {
   }
 
   upgrade_settings {
-    max_surge = var.gke_upgrade_max_surge
+    max_surge       = var.gke_upgrade_max_surge
     max_unavailable = 0
   }
 
