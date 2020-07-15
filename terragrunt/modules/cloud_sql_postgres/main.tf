@@ -1,5 +1,5 @@
 locals {
-  postgres_password = var.postgres_password ? null : random_password.db_password.result
+  postgres_password = var.postgres_password != null ? var.postgres_password : random_password.db_password.result
 }
 resource "google_sql_database_instance" "master" {
   name             = "${var.db_instance_name}-${random_id.db_name_suffix.hex}"
@@ -27,7 +27,6 @@ resource "random_id" "db_name_suffix" {
 # special characters "_%@"
 # 1 upper character
 resource "random_password" "db_password" {
-  count            = 1
   length           = 16
   special          = true
   override_special = "_%@"
