@@ -2,7 +2,7 @@ name: Test
 on: [push]
 
 jobs:
-  build_and_test:
+  test_rust:
     name: Test
     runs-on: ubuntu-latest
     steps:
@@ -11,3 +11,16 @@ jobs:
         with:
           toolchain: stable
       - run: cargo test
+  test_gatsby:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+          check-latest: true
+      - working-directory: ./web
+        run: yarn
+      - working-directory: ./web
+        run: yarn test
