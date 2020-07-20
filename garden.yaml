@@ -2,10 +2,13 @@ kind: Project
 name: foodify
 environments:
   - name: local
+  - name: dev
 defaultEnvironment: local
 providers:
   - name: local-kubernetes
     environments: ["local"]
+  - name: kubernetes
+    environments: ["dev"]
 ---
 kind: Module
 description: Prometheus is used for metrics collection
