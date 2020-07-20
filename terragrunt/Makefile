@@ -38,10 +38,10 @@ run:
 
 .PHONY: terraform
 terraform:
-	@docker run --rm --volumes-from ${DOCKER_CONTAINER_NAME}-config \
+	@docker run --volumes-from ${DOCKER_CONTAINER_NAME}-config \
 	-v `pwd`:/app/ \
 	--entrypoint /app/docker-entrypoint.sh \
 	--workdir /app/ \
-    --env GOOGLE_SECRET_NAME="${GOOGLE_SECRET_NAME}" \
+  --env GOOGLE_SECRET_NAME="${GOOGLE_SECRET_NAME}" \
 	local/tools \
 	/bin/sh -c 'cd /live/dev/; tg-apply-all'
