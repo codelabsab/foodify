@@ -24,7 +24,7 @@ jobs:
         run: |
           echo $GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE > key-file.json
           make authci
-      - name: Build Image
+      - name: Provision Resources
         working-directory: ./terragrunt
         run: |
           make runci
