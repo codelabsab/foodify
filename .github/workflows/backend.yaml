@@ -33,5 +33,5 @@ jobs:
           curl -sL https://get.garden.io/install.sh | bash
       - name: Garden Build
         run: |
-          garden build
+          $HOME/.garden/bin build
 
