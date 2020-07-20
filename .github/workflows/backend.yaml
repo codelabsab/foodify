@@ -14,3 +14,24 @@ jobs:
         with:
           toolchain: stable
       - run: cargo test
+  lint_rust:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: cargo clippy
+  build:
+    name: Build containers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Garden
+        run: |
+          curl -sL https://get.garden.io/install.sh | bash
+      - name: Garden Build
+        run: |
+          garden build
+
