@@ -1,9 +1,9 @@
 name: Backend
 on:
   push:
-    paths:
-      - '!web/**/*'
-      - '!terragrunt/**/*'
+    paths-ignore:
+      - 'web/**/*'
+      - 'terragrunt/**/*'
 jobs:
   test_rust:
     name: Test
