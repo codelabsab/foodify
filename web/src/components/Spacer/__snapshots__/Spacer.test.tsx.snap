@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render 1`] = `
+<Spacer>
+  <div
+    style={
+      Object {
+        "height": "10em",
+      }
+    }
+  />
+</Spacer>
+`;

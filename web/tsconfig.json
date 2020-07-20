@@ -1,6 +1,23 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "jsx": "react"
-  }
+    "allowJs": true,
+    "declaration": false,
+    "importHelpers": true,
+    "jsx": "react",
+    "lib": ["dom", "es2015", "es2017"],
+    "module": "commonjs",
+    "noEmitHelpers": false,
+    "noImplicitAny": true,
+    "noResolve": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "target": "esnext"
+  },
+  "include": ["./src/**/*", "./__tests__/**/*"]
 }
