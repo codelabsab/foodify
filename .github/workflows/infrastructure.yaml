@@ -9,6 +9,7 @@ on:
 jobs:
   deploy_infra:
     name: Deploy Infra
+    runs-on: ubuntu-latest
     steps:
       - name: Build Image
         run: |
