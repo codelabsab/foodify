@@ -21,6 +21,11 @@ auth:
 	@docker run -ti --name ${DOCKER_CONTAINER_NAME}-config local/tools \
 	/google-cloud-sdk/bin/gcloud auth login --project "${GOOGLE_PROJECT_ID}"
 
+.PHONY: authci
+authci:
+	@docker run -ti -v `pwd`:/app/ --name ${DOCKER_CONTAINER_NAME}-config local/tools \
+	/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file /app/key-file.json
+
 .PHONY: run
 run:
 	@docker run --rm -ti --volumes-from ${DOCKER_CONTAINER_NAME}-config \
