@@ -44,4 +44,4 @@ terraform:
 	--workdir /app/ \
   --env GOOGLE_SECRET_NAME="${GOOGLE_SECRET_NAME}" \
 	local/tools \
-	/bin/sh -c 'cd /app/live/dev; tg-apply-all'
+	/bin/bash -c 'cd /app/live/dev; tg-apply-all'
