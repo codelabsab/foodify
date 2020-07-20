@@ -35,6 +35,6 @@ export TERRAGRUNT_DOWNLOAD=/tmp/
 export TF_PLUGIN_CACHE_DIR=/tmp/
 
 #gcloud config set project "${GOOGLE_PROJECT_ID:-codelabs-admin}"
-gcloud beta secrets versions access latest --secret="${GOOGLE_SECRET_NAME:-codelabs-admin}" >> "/tmp/${GOOGLE_PROJECT_ID:-foodify-281512}.json"
+gcloud beta secrets versions access latest --project ${GOOGLE_PROJECT_ID:-foodify-281512} --secret="${GOOGLE_SECRET_NAME:-codelabs-admin}" >> "/tmp/${GOOGLE_PROJECT_ID:-foodify-281512}.json"
 
 exec "$@"

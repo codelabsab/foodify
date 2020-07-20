@@ -38,7 +38,7 @@ run:
 
 .PHONY: terraform
 terraform:
-	@docker run --volumes-from ${DOCKER_CONTAINER_NAME}-config \
+	@docker run -t --volumes-from ${DOCKER_CONTAINER_NAME}-config \
 	-v `pwd`:/app/ \
 	--entrypoint /app/docker-entrypoint.sh \
 	--workdir /app/ \
