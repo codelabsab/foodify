@@ -3,7 +3,6 @@ on:
   push:
     paths:
       - 'web/**/*'
-
 jobs:
   test:
     name: Test
@@ -13,8 +12,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
-          check-latest: true
-      - working-directory: ./web
+      - name: Install Dependencies
+        working-directory: ./web
         run: yarn
-      - working-directory: ./web
+      - name: Test Code
+        working-directory: ./web
         run: yarn test
+      - name: Build Site
+        working-directory: ./web
+        run: yarn build
