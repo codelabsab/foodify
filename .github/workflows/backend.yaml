@@ -32,6 +32,13 @@ jobs:
         working-directory: ./terragrunt
         run: |
           make build
+      - name: Authenticate Google SDK
+        working-directory: ./terragrunt
+        env:
+          GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
+        run: |
+          echo $GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE > key-file.json
+          make authci
       - name: Get Terraform Output
         working-directory: ./terragrunt
         run: |
