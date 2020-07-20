@@ -55,4 +55,4 @@ terraform-output:
 	--workdir /app/ \
   --env GOOGLE_SECRET_NAME="${GOOGLE_SECRET_NAME}" \
 	local/tools \
-	/bin/bash -c 'cd /app/live/dev && yes | terragrunt output-all -json --terragrunt-ignore-external-dependencies terragrunt-source-update terragrunt-non-interactive terragrunt-ignore-dependency-errors | /app/output.json'
+	/bin/bash -c 'cd /app/live/dev && terragrunt output-all -json --terragrunt-ignore-external-dependencies terragrunt-source-update terragrunt-non-interactive terragrunt-ignore-dependency-errors | /app/output.json'
