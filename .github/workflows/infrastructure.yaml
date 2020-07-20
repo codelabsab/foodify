@@ -17,7 +17,7 @@ jobs:
       - name: Build Image
         working-directory: ./terragrunt
         run: |
-          make build
+          make terraform-output
       - name: Authenticate Google SDK
         working-directory: ./terragrunt
         env:

@@ -9,6 +9,7 @@ providers:
     environments: ["local"]
   - name: kubernetes
     context: my-dev-context
+    deploymentRegistry:
     environments: ["dev"]
 ---
 kind: Module

@@ -28,6 +28,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Build Terragrunt Image
+        working-directory: ./terragrunt
+        run: |
+          make build
+      - name: Get Terraform Output
+        working-directory: ./terragrunt
+        run: |
+          make terraform-output
+      - name: Print
+        working-directory: ./terragrunt
+        run: |
+          cat output.json
       - name: Install Garden
         run: |
           curl -sL https://get.garden.io/install.sh | bash
