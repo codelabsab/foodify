@@ -1,0 +1,14 @@
+name: Infrastructure
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'terragrunt/**/*'
+jobs:
+  deploy_infra:
+    name: Deploy Infra
+    steps:
+      - name: Build Image
+        run: |
+          make build
