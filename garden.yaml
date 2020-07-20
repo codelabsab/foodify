@@ -8,6 +8,7 @@ providers:
   - name: local-kubernetes
     environments: ["local"]
   - name: kubernetes
+    context: my-dev-context
     environments: ["dev"]
 ---
 kind: Module
