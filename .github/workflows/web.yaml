@@ -1,17 +1,11 @@
-name: Test
-on: [push]
+name: Website
+on:
+  push:
+    paths:
+      - 'web/**/*'
 
 jobs:
-  test_rust:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-      - run: cargo test
-  test_gatsby:
+  test:
     name: Test
     runs-on: ubuntu-latest
     steps:
