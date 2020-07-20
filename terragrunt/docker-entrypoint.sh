@@ -30,11 +30,14 @@ EOF
 # exports for gcloud, kube and terraform
 export CLOUDSDK_CONFIG=/root/.config/gcloud
 export KUBECONFIG=/app/.kube/config
-export GOOGLE_APPLICATION_CREDENTIALS="/tmp/${GOOGLE_PROJECT_ID:-foodify-281512}.json"
+export GOOGLE_APPLICATION_CREDENTIALS="/app/key-file.json"
 export TERRAGRUNT_DOWNLOAD=/tmp/
 export TF_PLUGIN_CACHE_DIR=/tmp/
 
-#gcloud config set project "${GOOGLE_PROJECT_ID:-codelabs-admin}"
-gcloud beta secrets versions access latest --project ${GOOGLE_PROJECT_ID:-foodify-281512} --secret="${GOOGLE_SECRET_NAME:-codelabs-admin}" >> "/tmp/${GOOGLE_PROJECT_ID:-foodify-281512}.json"
+if [ ! -f $GOOGLE_APPLICATION_CREDENTIALS ]; then
+    echo "Keyfile missing, fetching it from gcloud secrets"
+    #gcloud config set project "${GOOGLE_PROJECT_ID:-codelabs-admin}"
+    gcloud beta secrets versions access latest --project ${GOOGLE_PROJECT_ID:-foodify-281512} --secret="${GOOGLE_SECRET_NAME:-codelabs-admin}" >> "/app/key-file.json"
+fi
 
 exec "$@"
