@@ -27,4 +27,4 @@ jobs:
       - name: Provision Resources
         working-directory: ./terragrunt
         run: |
-          make runci
+          make terraform
