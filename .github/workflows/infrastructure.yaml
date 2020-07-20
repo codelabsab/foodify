@@ -12,5 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build Image
+        working-directory: ./terragrunt
         run: |
           make build
