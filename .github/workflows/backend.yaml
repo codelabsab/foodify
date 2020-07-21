@@ -29,6 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Terragrunt Image
+        uses: satackey/action-docker-layer-caching@v0.0.3
         working-directory: ./terragrunt
         run: |
           make build
@@ -73,6 +74,7 @@ jobs:
         run: |
           cat garden.dev.env
       - name: Garden Build
+        uses: satackey/action-docker-layer-caching@v0.0.3
         run: |
           $HOME/.garden/bin/garden -e dev build --yes
 
