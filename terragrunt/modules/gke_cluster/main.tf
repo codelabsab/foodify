@@ -40,12 +40,6 @@ resource "google_container_cluster" "gke" {
   #Adding this block enables IP aliasing, making the cluster VPC-native instead of routes-based.
   ip_allocation_policy {}
 
-  private_cluster_config {
-    enable_private_endpoint = false
-    enable_private_nodes    = false
-    master_ipv4_cidr_block  = var.gke_private_cluster_cidr_block
-  }
-
   master_auth {
     client_certificate_config {
       issue_client_certificate = false
