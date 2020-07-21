@@ -3,12 +3,12 @@ terraform {
 }
 
 provider "google" {
-  version = "~> v3.17.0"
+  version = "~> v3.31.0"
   region  = var.region
 }
 
 provider "google-beta" {
-  version = ">= 2.14"
+  version = "~> 3.31"
 }
 
 provider "null" {
