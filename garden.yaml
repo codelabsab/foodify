@@ -56,6 +56,7 @@ values:
 ---
 kind: Module
 description: Postgresql stores our event log
+disabled: ${environment.name != 'local'}
 type: helm
 name: postgres
 repo: https://charts.bitnami.com/bitnami
@@ -72,6 +73,7 @@ values:
 ---
 kind: Module
 description: Elastic Search stores our views
+disabled: ${environment.name != 'local'}
 type: helm
 name: elasticsearch
 repo: https://charts.bitnami.com/bitnami
@@ -80,6 +82,7 @@ version: "12.5.1"
 ---
 kind: Module
 description: Kafka passes messages
+disabled: ${environment.name != 'local'}
 type: helm
 name: kafka
 repo: https://charts.bitnami.com/bitnami
