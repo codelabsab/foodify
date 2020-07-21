@@ -8,7 +8,7 @@ providers:
   - name: local-kubernetes
     environments: ["local"]
   - name: kubernetes
-    context: ${var.cluster_name}
+    context: ${var.kube_context}
     deploymentRegistry:
       hostname: ${var.repository_url}
     environments: ["dev"]
