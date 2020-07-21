@@ -62,10 +62,10 @@ jobs:
           curl -sL https://get.garden.io/install.sh | bash
       - name: Create Garden Variable File
         run: |
-          cat << EOF
+          echo "
             cluster_name=$(jq -rs '.[2].gke_cluster_name.value' terragrunt/output.json)
             repository_url=$(jq -rs '.[0].repository_url.value' terragrunt/output.json)
-          EOF >> garden.dev.env
+          " >> garden.dev.env
       - name: Print Env
         working-directory: ./terragrunt
         run: |
