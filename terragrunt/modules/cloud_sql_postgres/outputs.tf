@@ -1,5 +1,5 @@
-output "postgres_public_ip_address" {
-  value = google_sql_database_instance.master.public_ip_address
+output "postgres_private_ip_address" {
+  value = google_sql_database_instance.master.private_ip_address
 }
 
 output "postgres_connection_name" {

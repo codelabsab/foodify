@@ -26,3 +26,7 @@ variable "postgres_password" {
   description = "Password for the postgres user"
   default     = null
 }
+
+variable "network_self_link" {
+  description = "The self link of the Google Compute Engine network"
+}

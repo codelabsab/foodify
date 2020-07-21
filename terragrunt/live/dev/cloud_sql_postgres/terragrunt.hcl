@@ -10,3 +10,15 @@ terraform {
 include {
   path = find_in_parent_folders()
 }
+
+dependency "network" {
+  config_path = "../network"
+  mock_outputs = {
+    network_self_link = "known-after-apply"
+  }
+}
+
+inputs = {
+  network_self_link = dependency.network.outputs.network_self_link
+}
+

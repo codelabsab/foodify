@@ -37,6 +37,9 @@ resource "google_container_cluster" "gke" {
     type = "gke-master"
   }
 
+  networking_mode = "VPC_NATIVE"
+  network = var.network_self_link
+
   #Adding this block enables IP aliasing, making the cluster VPC-native instead of routes-based.
   ip_allocation_policy {}
 

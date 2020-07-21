@@ -1,6 +1,7 @@
 locals {
   postgres_password = var.postgres_password != null ? var.postgres_password : random_password.db_password.result
 }
+
 resource "google_sql_database_instance" "master" {
   name             = "${var.db_instance_name}-${random_id.db_name_suffix.hex}"
   database_version = "POSTGRES_${var.postgres_version}"
@@ -12,7 +13,8 @@ resource "google_sql_database_instance" "master" {
     availability_type = "ZONAL"
 
     ip_configuration {
-      ipv4_enabled = true
+      ipv4_enabled    = false
+      private_network = var.network_self_link
     }
   }
 }

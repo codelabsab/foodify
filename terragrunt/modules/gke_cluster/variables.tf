@@ -17,6 +17,10 @@ variable "region" {
   default     = "europe-north1"
 }
 
+variable "network_self_link" {
+  description = "The self link of the Google Compute Engine network"
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # Service Account
 # ---------------------------------------------------------------------------------------------------------------------
