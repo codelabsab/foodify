@@ -43,7 +43,7 @@ jobs:
         working-directory: ./terragrunt
         run: |
           make terraform-output
-      - name: Print Output
+      - name: Print Outputs
         working-directory: ./terragrunt
         run: |
           cat output.json
