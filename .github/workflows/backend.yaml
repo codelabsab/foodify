@@ -63,7 +63,7 @@ jobs:
           curl -sL https://get.garden.io/install.sh | bash
       - name: Create Garden Variable File
         run: |
-          export GARDEN_KUBE_CONTEXT = "$(kubectl config view -o json | jq -r ".contexts[0].name")"
+          export GARDEN_KUBE_CONTEXT="$(kubectl config view -o json | jq -r ".contexts[0].name")"
           echo "
             kube_context=$GARDEN_KUBE_CONTEXT
             repository_url=$(jq -rs '.[0].repository_url.value' terragrunt/output.json)
