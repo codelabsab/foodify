@@ -57,6 +57,7 @@ jobs:
           echo $(jq -rs '.[2].gke_cluster_name.value' terragrunt/output.json)
           echo $(jq -rs '.[2].gke_cluster_location.value' terragrunt/output.json)
           gcloud container clusters get-credentials $(jq -rs '.[2].gke_cluster_name.value' terragrunt/output.json) --region $(jq -rs '.[2].gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
+          kubectl config view
       - name: Install Garden
         run: |
           curl -sL https://get.garden.io/install.sh | bash
