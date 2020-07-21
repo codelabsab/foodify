@@ -11,5 +11,5 @@ COPY target/release/recipe_query recipe_query
 CMD ["./recipe_query"]
 
 FROM gcr.io/distroless/cc-debian10 AS api
-COPY --from=builder target/debug/api api
+COPY target/release/api api
 CMD ["./api"]
