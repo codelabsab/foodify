@@ -47,6 +47,11 @@ jobs:
         working-directory: ./terragrunt
         run: |
           cat output.json
+      - name: Install GCloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: foodify-281512
+          service_account_key: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
       - name: Install Garden
         run: |
           curl -sL https://get.garden.io/install.sh | bash
