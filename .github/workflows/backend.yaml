@@ -52,6 +52,9 @@ jobs:
         with:
           project_id: foodify-281512
           service_account_key: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
+      - name: Configure Kubectl
+        run: |
+          gcloud container clusters get-credentials $(jq -r '.gke_cluster_name.value' terragrunt/output.json) --region $(jq -r '.gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
       - name: Install Garden
         run: |
           curl -sL https://get.garden.io/install.sh | bash
