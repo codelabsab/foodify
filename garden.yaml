@@ -9,7 +9,8 @@ providers:
     environments: ["local"]
   - name: kubernetes
     context: ${var.cluster_name}
-    deploymentRegistry: ${var.repository_url}
+    deploymentRegistry:
+      hostname: ${var.repository_url}
     environments: ["dev"]
 ---
 kind: Module
