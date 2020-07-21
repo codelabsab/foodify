@@ -55,10 +55,7 @@ jobs:
           service_account_key: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
       - name: Configure Kubectl
         run: |
-          echo $(jq -rs '.[2].gke_cluster_name.value' terragrunt/output.json)
-          echo $(jq -rs '.[2].gke_cluster_location.value' terragrunt/output.json)
           gcloud container clusters get-credentials $(jq -rs '.[2].gke_cluster_name.value' terragrunt/output.json) --region $(jq -rs '.[2].gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
-          kubectl config view
       - name: Install Garden
         run: |
           curl -sL https://get.garden.io/install.sh | bash
@@ -66,8 +63,8 @@ jobs:
         run: |
           export GARDEN_KUBE_CONTEXT="$(kubectl config view -o json | jq -r ".contexts[0].name")"
           echo "
-            kube_context=$GARDEN_KUBE_CONTEXT
-            repository_url=$(jq -rs '.[0].repository_url.value' terragrunt/output.json)
+            kube-context=$GARDEN_KUBE_CONTEXT
+            repository-url=$(jq -rs '.[0].repository_url.value' terragrunt/output.json)
           " >> garden.dev.env
       - name: Print Env
         working-directory: ./terragrunt
@@ -75,5 +72,5 @@ jobs:
           cat garden.dev.env
       - name: Garden Build
         run: |
-          $HOME/.garden/bin/garden -e dev build --yes
+          $HOME/.garden/bin/garden -e dev --logger-type basic build --yes
 

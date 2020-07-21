@@ -2,6 +2,8 @@ kind: Project
 name: foodify
 environments:
   - name: local
+    variables:
+      repository-url: ""
   - name: dev
     production: true
 defaultEnvironment: local
@@ -9,10 +11,10 @@ providers:
   - name: local-kubernetes
     environments: ["local"]
   - name: kubernetes
-    context: ${var.kube_context}
+    context: ${var.kube-context}
     defaultHostname: "api.mydomain.com"
     deploymentRegistry:
-      hostname: ${var.repository_url}
+      hostname: ${var.repository-url}
     setupIngressController: false
     environments: ["dev"]
 ---
