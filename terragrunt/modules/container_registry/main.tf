@@ -5,5 +5,5 @@ resource "google_container_registry" "registry" {
 
 data "google_container_registry_repository" "foo" {
   project  = var.project_id
-  location = "EU"
+  region = "eu"
 }
