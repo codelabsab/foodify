@@ -23,7 +23,7 @@ locals {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_container_cluster" "gke" {
-  provider                 = "google-beta"
+  provider                 = google-beta
   name                     = "${var.environment}-gke-${random_id.random_id_suffix.hex}"
   location                 = local.gke_cluster_location
   project                  = var.project_id
