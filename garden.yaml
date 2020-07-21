@@ -14,7 +14,7 @@ providers:
     context: ${var.kube-context}
     defaultHostname: "api.mydomain.com"
     deploymentRegistry:
-      hostname: gcr.io
+      hostname: eu.gcr.io
       namespace: ${var.project-id}
     setupIngressController: false
     environments: ["dev"]
