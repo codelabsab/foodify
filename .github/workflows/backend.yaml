@@ -64,7 +64,7 @@ jobs:
       - name: Create Garden Variable File
         run: |
           echo "
-            cluster_name=$(jq -rs '.[2].gke_cluster_name.value' terragrunt/output.json)
+            kube_context=$(kubectl config view -o json | jq -r '.contexts.[0].name')
             repository_url=$(jq -rs '.[0].repository_url.value' terragrunt/output.json)
           " >> garden.dev.env
       - name: Print Env
