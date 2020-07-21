@@ -74,5 +74,5 @@ jobs:
           cat garden.dev.env
       - name: Garden Build
         run: |
-          $HOME/.garden/bin/garden -e dev build
+          $HOME/.garden/bin/garden -e dev build --yes
 
