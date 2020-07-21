@@ -27,5 +27,7 @@ jobs:
           make authci
       - name: Provision Resources
         working-directory: ./terragrunt
+        env:
+          TERRAGRUNT_AUTO_INIT: "true"
         run: |
           make terraform
