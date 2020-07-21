@@ -92,7 +92,7 @@ version: "11.3.2"
 kind: Module
 name: recipe-command
 type: container
-dockerfile: Dockerfile
+dockerfile: "${environment.name == 'local' ? 'Dockerfile' : 'prod.Dockerfile'}"
 build:
   targetImage: recipe_command
 services:
@@ -115,7 +115,7 @@ services:
 kind: Module
 name: recipe-query
 type: container
-dockerfile: Dockerfile
+dockerfile: "${environment.name == 'local' ? 'Dockerfile' : 'prod.Dockerfile'}"
 build:
   targetImage: recipe_query
 services:
@@ -137,7 +137,7 @@ services:
 kind: Module
 name: api
 type: container
-dockerfile: Dockerfile
+dockerfile: "${environment.name == 'local' ? 'Dockerfile' : 'prod.Dockerfile'}"
 build:
   targetImage: api
 services:
