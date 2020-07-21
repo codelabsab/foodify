@@ -64,6 +64,7 @@ jobs:
           echo "
             kube-context=$GARDEN_KUBE_CONTEXT
             repository-url=$(jq -rs '.[0].repository_url.value' terragrunt/output.json)
+            project-id=foodify-281512
           " >> garden.dev.env
       - name: Print Env
         working-directory: ./terragrunt
