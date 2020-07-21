@@ -54,16 +54,17 @@ jobs:
           service_account_key: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
       - name: Configure Kubectl
         run: |
-          echo $(jq -rs '.[1].gke_cluster_name.value' terragrunt/output.json)
-          echo $(jq -rs '.[1].gke_cluster_location.value' terragrunt/output.json)
-          gcloud container clusters get-credentials $(jq -rs '.[1].gke_cluster_name.value' terragrunt/output.json) --region $(jq -rs '.[1].gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
+          echo $(jq -rs '.[2].gke_cluster_name.value' terragrunt/output.json)
+          echo $(jq -rs '.[2].gke_cluster_location.value' terragrunt/output.json)
+          gcloud container clusters get-credentials $(jq -rs '.[2].gke_cluster_name.value' terragrunt/output.json) --region $(jq -rs '.[2].gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
       - name: Install Garden
         run: |
           curl -sL https://get.garden.io/install.sh | bash
       - name: Create Garden Variable File
         run: |
           cat << EOF
-            cluster_name=$(jq -rs '.[1].gke_cluster_name.value' terragrunt/output.json)
+            cluster_name=$(jq -rs '.[2].gke_cluster_name.value' terragrunt/output.json)
+            repository_url=$(jq -rs '.[0].repository_url.value' terragrunt/output.json)
           EOF >> garden.dev.env
       - name: Print Env
         working-directory: ./terragrunt
