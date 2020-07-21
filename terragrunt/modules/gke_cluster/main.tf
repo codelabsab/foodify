@@ -23,6 +23,7 @@ locals {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_container_cluster" "gke" {
+  provider                 = "google-beta"
   name                     = "${var.environment}-gke-${random_id.random_id_suffix.hex}"
   location                 = local.gke_cluster_location
   project                  = var.project_id
@@ -62,7 +63,7 @@ resource "google_container_cluster" "gke" {
 
     istio_config {
       disabled = false
-      auth = AUTH_MUTUAL_TLS
+      auth = "AUTH_MUTUAL_TLS"
     }
 
   }

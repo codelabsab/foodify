@@ -32,6 +32,7 @@ jobs:
         with:
           toolchain: stable
       - uses: actions/cache@v2
+        id: cache
         with:
           path: |
             ~/.cargo/registry
@@ -80,10 +81,6 @@ jobs:
             repository-url=$(jq -rs '.[0].repository_url.value' terragrunt/output.json)
             project-id=foodify-281512
           " >> garden.dev.env
-      - name: Print Env
-        working-directory: ./terragrunt
-        run: |
-          cat garden.dev.env
       - name: Garden Build
         run: |
           $HOME/.garden/bin/garden -e dev --logger-type basic build --yes
