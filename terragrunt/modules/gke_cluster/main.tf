@@ -60,6 +60,11 @@ resource "google_container_cluster" "gke" {
       disabled = var.gke_horizontal_pod_autoscaling_disable
     }
 
+    istio_config {
+      disabled = false
+      auth = AUTH_MUTUAL_TLS
+    }
+
   }
 
   maintenance_policy {
