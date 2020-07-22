@@ -194,10 +194,12 @@ manifests:
       selector:
         app: recipe-command
       ports:
-        - protocol: TCP
+        - name: grpc
+          protocol: TCP
           port: 4071
           targetPort: grpc
-        - protocol: TCP
+        - name: http
+          protocol: TCP
           port: 9000
           targetPort: http
 
