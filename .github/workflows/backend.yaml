@@ -121,7 +121,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: terraform-output
-          path: /
+          path: ./
       - name: Install GCloud
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
