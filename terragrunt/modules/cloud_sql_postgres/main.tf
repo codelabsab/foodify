@@ -37,3 +37,18 @@ resource "google_sql_user" "user" {
   password = local.postgres_password
   project  = var.project_id
 }
+
+resource "google_service_account" "service_account" {
+  account_id        = "${google_sql_database_instance.master.name}-service-account"
+  project           = var.project_id
+}
+
+resource "google_service_account_iam_binding" "admin-account-iam" {
+  service_account_id = google_service_account.service_account.name
+  role               = "roles/cloudsql.client"
+  members = []
+}
+
+resource "google_service_account_key" "service_account_key" {
+  service_account_id = google_service_account.service_account.name
+}

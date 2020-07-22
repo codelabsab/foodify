@@ -13,3 +13,7 @@ output "postgres_username" {
 output "postgres_password" {
   value = local.postgres_password
 }
+
+output "postgres_service_account_key_file" {
+  value = google_service_account_key.service_account_key.private_key
+}
