@@ -5,6 +5,9 @@ on:
     paths-ignore:
       - 'web/**/*'
       - 'terragrunt/**/*'
+env:
+  TERRAGRUNT_IMAGE: eu.gcr.io/foodify-281512/terragrunt
+  DOCKER_BUILDKIT: 1
 jobs:
   test_rust:
     name: Test
@@ -42,10 +45,10 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Build Rust Binaries
         run: cargo build --release
-      - name: Build Terragrunt Image
-        working-directory: ./terragrunt
+      - name: Pull Terragrunt Image
         run: |
-          make build
+          docker pull ${TERRAGRUNT_IMAGE}:latest
+          docker tag ${TERRAGRUNT_IMAGE}:latest local/tools
       - name: Authenticate Google SDK
         working-directory: ./terragrunt
         env:
