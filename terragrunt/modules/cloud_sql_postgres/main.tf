@@ -43,10 +43,17 @@ resource "google_service_account" "service_account" {
   project           = var.project_id
 }
 
-resource "google_service_account_iam_binding" "admin-account-iam" {
+data "google_iam_policy" "postgres_client" {
+  binding {
+    role = "roles/cloudsql.client"
+
+    members = []
+  }
+}
+
+resource "google_service_account_iam_policy" "service_account_iam" {
   service_account_id = google_service_account.service_account.name
-  role               = "roles/cloudsql.client"
-  members = []
+  policy_data = data.google_iam_policy.postgres_client.policy_data
 }
 
 resource "google_service_account_key" "service_account_key" {
