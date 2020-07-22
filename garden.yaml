@@ -147,7 +147,7 @@ manifests:
               image: ${modules.recipe-command.outputs.deployment-image-name}:${modules.recipe-command.version}
               env:
                 - name: POSTGRES_URI
-                  value: "${environment.name == 'local' ? 'postgres://user:password@postgres-postgresql:5432/postgres' : 'postgres://${var.postgres-username}:${var.postgres-password}@${var.postgres-ip}:5432/postgres'}"
+                  value: 'postgres://${var.postgres-username}:${var.postgres-password}@localhost:5432/postgres'
                 - name: KAFKA_URI
                   value: "kafka:9092"
               ports:
@@ -164,7 +164,7 @@ manifests:
             - name: cloudsql-proxy
               image: gcr.io/cloudsql-docker/gce-proxy:1.16
               command: ["/cloud_sql_proxy",
-                        "-instances=${var.postgres-connection-name}=tcp:3306",
+                        "-instances=${var.postgres-connection-name}=tcp:5432",
                         "-credential_file=/cloudsql/postgres_credentials.json"]
               volumeMounts:
                 - name: postgres-service-account-volume
