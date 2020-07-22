@@ -116,10 +116,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: rust-binaries
+          path: targets/
       - name: Get Terraform Output
         uses: actions/download-artifact@v2
         with:
           name: terraform-output
+          path: /
       - name: Install GCloud
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
