@@ -124,9 +124,8 @@ manifests:
     metadata:
       name: postgres-service-account
     type: Opaque
-    stringData:
-      postgres_credentials.json: |-
-        ${var.postgres-service-account}
+    data:
+      postgres_credentials.json: ${var.postgres-service-account}
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
