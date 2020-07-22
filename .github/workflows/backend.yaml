@@ -74,7 +74,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: terraform-output
-          path: terragrunt/output.json
+          path: output.json
   build_rust:
     name: Build Rust Binaries
     runs-on: ubuntu-latest
@@ -131,7 +131,7 @@ jobs:
         run: gcloud auth configure-docker
       - name: Configure Kubectl
         run: |
-          gcloud container clusters get-credentials $(jq -r '.gke_cluster_name.value' terragrunt/output.json) --region $(jq -r '.gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
+          gcloud container clusters get-credentials $(jq -r '.gke_cluster_name.value' output.json) --region $(jq -r '.gke_cluster_location.value' output.json) --project foodify-281512
       - name: Install Garden
         run: |
           curl -sL https://get.garden.io/install.sh | bash
@@ -139,12 +139,12 @@ jobs:
         run: |
           echo "
             kube-context=$(kubectl config view -o json | jq -r ".contexts[0].name")
-            repository-url=$(jq -r '.repository_url.value' terragrunt/output.json)
-            postgres-ip=$(jq -r '.postgres_public_ip_address.value' terragrunt/output.json)
-            postgres-username=$(jq -r '.postgres_username.value' terragrunt/output.json)
-            postgres-password=$(jq -r '.postgres_password.value' terragrunt/output.json)
-            postgres-connection-name=$(jq -r '.postgres_connection_name.value' terragrunt/output.json)
-            postgres-service-account=$(jq -r '.postgres_service_account_key_file.value' terragrunt/output.json)
+            repository-url=$(jq -r '.repository_url.value' output.json)
+            postgres-ip=$(jq -r '.postgres_public_ip_address.value' output.json)
+            postgres-username=$(jq -r '.postgres_username.value' output.json)
+            postgres-password=$(jq -r '.postgres_password.value' output.json)
+            postgres-connection-name=$(jq -r '.postgres_connection_name.value' output.json)
+            postgres-service-account=$(jq -r '.postgres_service_account_key_file.value' output.json)
             project-id=foodify-281512
           " >> garden.dev.env
       - name: Garden Build
