@@ -86,6 +86,10 @@ name: kafka
 repo: https://charts.bitnami.com/bitnami
 chart: kafka
 version: "11.3.2"
+
+########################################
+## RECIPE COMMAND                     ##
+########################################
 ---
 kind: Module
 name: recipe-command
@@ -93,22 +97,62 @@ type: container
 dockerfile: "${environment.name == 'local' ? 'Dockerfile' : 'prod.Dockerfile'}"
 build:
   targetImage: recipe_command
-services:
-  - name: recipe-command
-    dependencies:
-      - postgres
-    env:
-      POSTGRES_URI: "${environment.name == 'local' ? 'postgres://user:password@postgres-postgresql:5432/postgres' : 'postgres://${var.postgres-username}:${var.postgres-password}@${var.postgres-ip}:5432/postgres'}"
-      KAFKA_URI: "kafka:9092"
-    ports:
-      - name: grpc
-        containerPort: 4071
-      - name: http
-        containerPort: 9000
-    healthCheck:
-      httpGet:
-        port: http
-        path: /health
+---
+kind: Module
+name: recipe-command-k8s
+type: kubernetes
+manifests:
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: recipe-command-deployment
+      labels:
+        app: recipe-command
+    spec:
+      replicas: 3
+      selector:
+        matchLabels:
+          app: recipe-command
+      template:
+        metadata:
+          labels:
+            app: recipe-command
+        spec:
+          containers:
+            - name: recipe-command
+              image: ${modules.recipe-command.outputs.deployment-image-name}:${modules.my-module.version}
+              env:
+                - name: POSTGRES_URI
+                  value: "${environment.name == 'local' ? 'postgres://user:password@postgres-postgresql:5432/postgres' : 'postgres://${var.postgres-username}:${var.postgres-password}@${var.postgres-ip}:5432/postgres'}"
+                - name: KAFKA_URI
+                  value: "kafka:9092"
+              ports:
+                - name: grpc
+                  containerPort: 4071
+                - name: http
+                  containerPort: 9000
+              livenessProbe:
+                path: /health
+                port: http
+                initialDelaySeconds: 3
+                periodSeconds: 3
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: recipe-command
+    spec:
+      selector:
+        app: recipe-command
+      ports:
+        - protocol: TCP
+          port: grpc
+        - protocol: TCP
+          port: http
+
+
+########################################
+## RECIPE QUERY                       ##
+########################################
 ---
 kind: Module
 name: recipe-query
@@ -131,6 +175,10 @@ services:
       httpGet:
         port: http
         path: /health
+
+########################################
+## API                                ##
+########################################
 ---
 kind: Module
 name: api
