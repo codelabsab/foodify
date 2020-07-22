@@ -24,7 +24,8 @@ RUN apt-get update && apt-get install -y \
     bash-completion \
     curl \
     git \
-    vim 
+    vim  \
+    jq
 
 RUN curl -L -o /usr/local/bin/kubectx https://raw.githubusercontent.com/ahmetb/kubectx/v${KUBECTX_VERSION:-0.8.0}/kubectx && \
     curl -L -o /usr/local/bin/kubens https://raw.githubusercontent.com/ahmetb/kubectx/v${KUBECTX_VERSION:-0.8.0}/kubens && \
