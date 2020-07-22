@@ -118,10 +118,11 @@ jobs:
           name: rust-binaries
           path: targets/
       - name: Fix Rust Binary Permsissions
+        working-directory: ./targets
         run: |
-          chmod +x targets/api
-          chmod +x targets/recipe_command
-          chmod +x targets/recipe_query
+          chmod 755 api
+          chmod 755 recipe_command
+          chmod 755 recipe_query
       - name: Get Terraform Output
         uses: actions/download-artifact@v2
         with:
