@@ -1,6 +1,7 @@
 kind: Module
 name: kafdrop
 type: container
+disabled: ${environment.name != 'local'}
 image: obsidiandynamics/kafdrop
 services:
   - name: kafdrop
