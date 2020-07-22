@@ -42,8 +42,13 @@ jobs:
           service_account_key: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
       - name: Configure Kubectl
         run: |
-          gcloud container clusters get-credentials $(jq -rs '.[2].gke_cluster_name.value' terragrunt/output.json) --region $(jq -rs '.[2].gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
+          gcloud container clusters get-credentials $(jq -rs '.gke_cluster_name.value' terragrunt/output.json) --region $(jq -rs '.gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
       - name: Install CRDs
         run: |
           kubectl apply -f tools/crd/prometheus.yaml
+      - name: Invoke Backend Workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Backend
+          token: ${{ secrets.PERSONAL_TOKEN }}
 

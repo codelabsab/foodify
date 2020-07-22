@@ -73,7 +73,6 @@ values:
 ---
 kind: Module
 description: Elastic Search stores our views
-disabled: ${environment.name != 'local'}
 type: helm
 name: elasticsearch
 repo: https://charts.bitnami.com/bitnami
@@ -82,7 +81,6 @@ version: "12.5.1"
 ---
 kind: Module
 description: Kafka passes messages
-disabled: ${environment.name != 'local'}
 type: helm
 name: kafka
 repo: https://charts.bitnami.com/bitnami

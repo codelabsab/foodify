@@ -1,5 +1,6 @@
 name: Backend
 on:
+  workflow_dispatch: {}
   push:
     paths-ignore:
       - 'web/**/*'
@@ -69,19 +70,18 @@ jobs:
         run: gcloud auth configure-docker
       - name: Configure Kubectl
         run: |
-          gcloud container clusters get-credentials $(jq -rs '.[2].gke_cluster_name.value' terragrunt/output.json) --region $(jq -rs '.[2].gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
+          gcloud container clusters get-credentials $(jq -rs '.gke_cluster_name.value' terragrunt/output.json) --region $(jq -rs '.gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
       - name: Install Garden
         run: |
           curl -sL https://get.garden.io/install.sh | bash
       - name: Create Garden Variable File
         run: |
-          export GARDEN_KUBE_CONTEXT="$(kubectl config view -o json | jq -r ".contexts[0].name")"
           echo "
-            kube-context=$GARDEN_KUBE_CONTEXT
-            repository-url=$(jq -rs '.[0].repository_url.value' terragrunt/output.json)
-            postgres-ip=$(jq -rs '.[1].postgres_public_ip_address.value' terragrunt/output.json)
-            postgres-username=$(jq -rs '.[1].postgres_username.value' terragrunt/output.json)
-            postgres-password=$(jq -rs '.[1].postgres_password.value' terragrunt/output.json)
+            kube-context=$(kubectl config view -o json | jq -r ".contexts[0].name")
+            repository-url=$(jq -rs '.repository_url.value' terragrunt/output.json)
+            postgres-ip=$(jq -rs '.postgres_public_ip_address.value' terragrunt/output.json)
+            postgres-username=$(jq -rs '.postgres_username.value' terragrunt/output.json)
+            postgres-password=$(jq -rs '.postgres_password.value' terragrunt/output.json)
             project-id=foodify-281512
           " >> garden.dev.env
       - name: Garden Build
