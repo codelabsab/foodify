@@ -24,7 +24,7 @@ providers:
 kind: Module
 description: Prometheus is used for metrics collection
 type: helm
-name: prometheus
+name: prometheus-operator
 repo: https://charts.bitnami.com/bitnami
 chart: prometheus-operator
 version: "0.22.3"
