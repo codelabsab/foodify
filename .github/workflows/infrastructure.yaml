@@ -7,6 +7,9 @@ on:
     paths:
       - 'terragrunt/**/*'
       - '.github/workflows/infrastructure.yaml'
+env:
+  CACHE_IMAGE: eu.gcr.io/foodify-281512/terragrunt
+  DOCKER_BUILDKIT: 1
 jobs:
   deploy_infra:
     name: Deploy Infra
@@ -14,10 +17,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Install GCloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: foodify-281512
+          service_account_key: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
+      - name: Authenticate Docker
+        run: gcloud auth configure-docker
       - name: Build Image
         working-directory: ./terragrunt
         run: |
-          make build
+          make buildci
+      - name: Push Terragrunt Image
+        run: docker push $CACHE_IMAGE:latest
       - name: Authenticate Google SDK
         working-directory: ./terragrunt
         env:

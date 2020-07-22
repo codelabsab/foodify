@@ -15,6 +15,16 @@ build:
 	--build-arg KUBECTX_VERSION="${KUBECTX_VERSION}" \
     . -t local/tools
 
+.PHONY: buildci
+buildci:
+	@docker build \
+	--cache-from "${CACHE_IMAGE}":latest \
+	--build-arg TERRAGRUNT_VERSION="${TERRAGRUNT_VERSION}" \
+	--build-arg HELM_VERSION="${HELM_VERSION}" \
+	--build-arg GOOGLE_SDK_VERSION="${GOOGLE_SDK_VERSION}" \
+	--build-arg KUBECTX_VERSION="${KUBECTX_VERSION}" \
+    . -t local/tools -t "${CACHE_IMAGE}":latest
+
 
 .PHONY: auth
 auth:
