@@ -74,7 +74,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: terraform-output
-          path: output.json
+          path: terragrunt/output.json
   build_rust:
     name: Build Rust Binaries
     runs-on: ubuntu-latest
