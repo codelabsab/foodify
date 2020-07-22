@@ -24,7 +24,7 @@ locals {
 
 resource "google_container_cluster" "gke" {
   provider                 = google-beta
-  name                     = "${var.environment}-gke-${random_id.random_id_suffix.hex}"
+  name                     = "${var.setup_prefix}"
   location                 = local.gke_cluster_location
   project                  = var.project_id
   min_master_version       = data.google_container_engine_versions.info_available_k8_versions.latest_master_version
@@ -33,7 +33,7 @@ resource "google_container_cluster" "gke" {
 
   # Self links in the same resource isn't allowed, hence explicit declaration.
   resource_labels = {
-    name = "${var.environment}-gke-${random_id.random_id_suffix.hex}"
+    name = "${var.setup_prefix}"
     type = "gke-master"
   }
 

@@ -1,3 +1,8 @@
+
+variable "setup_prefix" {
+  description = "The prefix to use for resource names"
+}
+
 variable "region" {
   description = "GCP region used for all resources"
   default     = "europe-north1"

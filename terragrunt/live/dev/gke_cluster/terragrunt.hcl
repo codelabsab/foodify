@@ -18,6 +18,14 @@ dependency "network" {
   }
 }
 
+dependency "setup_prefix" {
+  config_path = "../setup_prefix"
+  mock_outputs = {
+    setup_prefix = "known-after-apply"
+  }
+}
+
 inputs = {
   network_self_link = dependency.network.outputs.network_self_link
+  setup_prefix = dependency.setup_prefix.outputs.setup_prefix
 }

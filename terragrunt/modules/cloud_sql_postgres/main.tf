@@ -3,7 +3,7 @@ locals {
 }
 
 resource "google_sql_database_instance" "master" {
-  name             = "${var.db_instance_name}-${random_id.db_name_suffix.hex}"
+  name             = "${var.setup_prefix}-${var.db_instance_name}"
   database_version = "POSTGRES_${var.postgres_version}"
   region           = var.region
   project          = var.project_id
@@ -17,10 +17,6 @@ resource "google_sql_database_instance" "master" {
       private_network = var.network_self_link
     }
   }
-}
-
-resource "random_id" "db_name_suffix" {
-  byte_length = 4
 }
 
 

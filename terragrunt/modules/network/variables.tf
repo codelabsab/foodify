@@ -2,6 +2,9 @@
 # Common
 # ---------------------------------------------------------------------------------------------------------------------
 
+variable "setup_prefix" {
+  description = "The prefix to use for resource names"
+}
 
 variable "project_id" {
   description = "Project ID. The <prefix>-<project>-<suffix>."
