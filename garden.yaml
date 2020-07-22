@@ -166,8 +166,9 @@ manifests:
                 - name: http
                   containerPort: 9000
               livenessProbe:
-                path: /health
-                port: http
+                httpGet:
+                  path: /health
+                  port: http
                 initialDelaySeconds: 3
                 periodSeconds: 3
             - name: cloudsql-proxy
@@ -179,10 +180,10 @@ manifests:
                 - name: postgres-service-account-volume
                   mountPath: /cloudsql
                   readOnly: true
-              volumes:
-                - name: postgres-service-account-volume
-                  secret:
-                    secretName: postgres-service-account
+          volumes:
+            - name: postgres-service-account-volume
+              secret:
+                secretName: postgres-service-account
   - apiVersion: v1
     kind: Service
     metadata:
