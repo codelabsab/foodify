@@ -55,4 +55,4 @@ terraform-output:
 	--workdir /app/ \
   --env GOOGLE_SECRET_NAME="${GOOGLE_SECRET_NAME}" \
 	local/tools \
-	/bin/bash -c 'cd /app/live/dev && terragrunt output-all -json | jq -s add | tee /app/output.json'
+	/bin/bash -c 'cd /app/live/dev && terragrunt output-all -json | jq -n "reduce inputs as $in (null; . + $in)" | tee /app/output.json'
