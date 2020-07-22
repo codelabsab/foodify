@@ -131,7 +131,7 @@ manifests:
   - apiVersion: v1
     kind: Secret
     metadata:
-      name: mysecret
+      name: postgres-service-account
     type: Opaque
     stringData:
       postgres_credentials.json: |-
