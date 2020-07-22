@@ -47,9 +47,10 @@ jobs:
         working-directory: ./terragrunt
         run: |
           make terraform-output
-      - uses: pCYSl5EDgo/cat@master
-        id: hello
+      - name: Upload output
+        uses: actions/upload-artifact@v1
         with:
+          name: output
           path: terragrunt/output.json
       - name: Configure Kubectl
         run: |
