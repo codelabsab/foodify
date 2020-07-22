@@ -36,8 +36,6 @@ services:
         module: grafana-volume
         containerPath: /var/lib/grafana
 ---
-
----
 kind: Module
 name: grafana-ingress
 type: kubernetes

@@ -8,6 +8,8 @@ environments:
     production: true
 defaultEnvironment: local
 providers:
+  - name: conftest-kubernetes
+    environments: ["local", "dev"]
   - name: local-kubernetes
     environments: ["local"]
   - name: kubernetes
