@@ -73,7 +73,7 @@ jobs:
           cat output.json
       - name: Configure Kubectl
         run: |
-          gcloud container clusters get-credentials $(jq -rs '.gke_cluster_name.value' terragrunt/output.json) --region $(jq -rs '.gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
+          gcloud container clusters get-credentials $(jq -r '.gke_cluster_name.value' terragrunt/output.json) --region $(jq -r '.gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
       - name: Install Garden
         run: |
           curl -sL https://get.garden.io/install.sh | bash
@@ -81,10 +81,10 @@ jobs:
         run: |
           echo "
             kube-context=$(kubectl config view -o json | jq -r ".contexts[0].name")
-            repository-url=$(jq -rs '.repository_url.value' terragrunt/output.json)
-            postgres-ip=$(jq -rs '.postgres_public_ip_address.value' terragrunt/output.json)
-            postgres-username=$(jq -rs '.postgres_username.value' terragrunt/output.json)
-            postgres-password=$(jq -rs '.postgres_password.value' terragrunt/output.json)
+            repository-url=$(jq -r '.repository_url.value' terragrunt/output.json)
+            postgres-ip=$(jq -r '.postgres_public_ip_address.value' terragrunt/output.json)
+            postgres-username=$(jq -r '.postgres_username.value' terragrunt/output.json)
+            postgres-password=$(jq -r '.postgres_password.value' terragrunt/output.json)
             project-id=foodify-281512
           " >> garden.dev.env
       - name: Garden Build
