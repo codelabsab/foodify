@@ -154,7 +154,7 @@ manifests:
         spec:
           containers:
             - name: recipe-command
-              image: ${modules.recipe-command.outputs.deployment-image-name}:${modules.recipe-comman.version}
+              image: ${modules.recipe-command.outputs.deployment-image-name}:${modules.recipe-command.version}
               env:
                 - name: POSTGRES_URI
                   value: "${environment.name == 'local' ? 'postgres://user:password@postgres-postgresql:5432/postgres' : 'postgres://${var.postgres-username}:${var.postgres-password}@${var.postgres-ip}:5432/postgres'}"
