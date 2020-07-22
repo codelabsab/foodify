@@ -147,7 +147,7 @@ manifests:
               image: ${modules.recipe-command.outputs.deployment-image-name}:${modules.recipe-command.version}
               env:
                 - name: POSTGRES_URI
-                  value: 'postgres://${var.postgres-username}:${var.postgres-password}@localhost:5432/postgres'
+                  value: 'postgres://${var.postgres-username}:${var.postgres-password}@127.0.0.1:5432/postgres'
                 - name: KAFKA_URI
                   value: "kafka:9092"
               ports:
