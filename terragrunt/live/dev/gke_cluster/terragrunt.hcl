@@ -28,4 +28,5 @@ dependency "setup_prefix" {
 inputs = {
   network_self_link = dependency.network.outputs.network_self_link
   setup_prefix = dependency.setup_prefix.outputs.setup_prefix
+  max_node_count = 5
 }
