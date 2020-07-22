@@ -35,3 +35,23 @@ services:
       - name: grafana-volume
         module: grafana-volume
         containerPath: /var/lib/grafana
+---
+
+---
+kind: Module
+name: grafana-ingress
+type: kubernetes
+disabled: ${environment.name == 'local'}
+manifests:
+  - apiVersion: networking.k8s.io/v1beta1
+    kind: Ingress
+    metadata:
+      name: grafana-ingress
+    spec:
+      rules:
+        - http:
+            paths:
+              - path: /grafana
+                backend:
+                  serviceName: grafana
+                  servicePort: 3000
