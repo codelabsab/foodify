@@ -45,6 +45,13 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Build Rust Binaries
         run: cargo build --release
+      - name: Install GCloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: foodify-281512
+          service_account_key: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
+      - name: Authenticate Docker
+        run: gcloud auth configure-docker
       - name: Pull Terragrunt Image
         run: |
           docker pull ${TERRAGRUNT_IMAGE}:latest
@@ -64,13 +71,6 @@ jobs:
         working-directory: ./terragrunt
         run: |
           cat output.json
-      - name: Install GCloud
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          project_id: foodify-281512
-          service_account_key: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
-      - name: Authenticate Docker
-        run: gcloud auth configure-docker
       - name: Configure Kubectl
         run: |
           gcloud container clusters get-credentials $(jq -rs '.gke_cluster_name.value' terragrunt/output.json) --region $(jq -rs '.gke_cluster_location.value' terragrunt/output.json) --project foodify-281512
