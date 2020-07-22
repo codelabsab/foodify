@@ -39,7 +39,7 @@ resource "google_sql_user" "user" {
 }
 
 resource "google_service_account" "service_account" {
-  account_id        = "${google_sql_database_instance.master.name}-service-account"
+  account_id        = "${var.setup_prefix}-postgres"
   project           = var.project_id
 }
 
