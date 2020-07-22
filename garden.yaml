@@ -25,23 +25,12 @@ kind: Module
 description: Prometheus is used for metrics collection
 type: helm
 name: prometheus
-repo: https://kubernetes-charts.storage.googleapis.com/
+repo: https://charts.bitnami.com/bitnami
 chart: prometheus-operator
-version: "8.13.12"
+version: "0.22.3"
 values:
-  grafana:
-    enabled: false
-  prometheus:
-    prometheusSpec:
-      serviceMonitorSelectorNilUsesHelmValues: true
-    additionalServiceMonitors:
-      - name: grafana
-        endpoints:
-          - port: web
-            interval: 5s
-        selector:
-          matchLabels:
-            service: grafana
+  operator:
+    createCustomResource: false
 ---
 kind: Module
 description: Loki stores logs for usage in grafana
