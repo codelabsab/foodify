@@ -15,5 +15,5 @@ output "postgres_password" {
 }
 
 output "postgres_service_account_key_file" {
-  value = google_service_account_key.service_account_key.private_key
+  value = base64decode(google_service_account_key.service_account_key.private_key)
 }
