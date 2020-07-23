@@ -204,6 +204,7 @@ manifests:
 kind: Module
 name: recipe-query-local
 type: container
+disabled: ${environment.name != 'local'}
 dockerfile: Dockerfile
 build:
   targetImage: recipe_query
