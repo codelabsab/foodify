@@ -179,7 +179,6 @@ manifests:
     metadata:
       name: recipe-command
     spec:
-      type: NodePort
       selector:
         app: recipe-command
       ports:
@@ -302,7 +301,7 @@ manifests:
                   containerPort: 9000
               livenessProbe:
                 httpGet:
-                  path: /
+                  path: /api
                   port: http
                 initialDelaySeconds: 3
                 periodSeconds: 3
