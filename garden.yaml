@@ -356,7 +356,7 @@ manifests:
       name: api
     spec:
       hosts:
-        - api.foodify-deafault.svc.cluster.local
+        - "*"
       gateways:
         - gateway
       http:
