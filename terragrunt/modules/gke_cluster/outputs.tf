@@ -32,7 +32,7 @@ output "gke_zones" {
   value       = data.google_compute_zones.info_available_k8_zones.names
 }
 
-output "public_ip" {
+output "gke_public_ip" {
   description = "The public ip to be used by the ingress controller"
   value       = google_compute_global_address.ip.address
 }
