@@ -30,6 +30,7 @@ manifests:
       labels:
         app: grafana
     spec:
+      serviceName: grafana
       replicas: 1
       selector:
         matchLabels:
