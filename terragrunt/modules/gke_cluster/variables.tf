@@ -122,7 +122,7 @@ variable "gke_horizontal_pod_autoscaling_disable" {
 variable "gke_http_load_balancing_disable" {
   description = "This makes it easy to set up HTTP load balancers for services in a cluster. It is enabled by default"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "gke_upgrade_max_surge" {
