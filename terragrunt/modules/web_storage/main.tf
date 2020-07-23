@@ -12,6 +12,7 @@ resource "google_storage_bucket" "assets" {
 }
 
 resource "google_compute_backend_bucket" "assets" {
+  project          = var.project_id
   name        = var.setup_prefix
   description = "Contains static app assets"
   bucket_name = google_storage_bucket.assets.name
