@@ -31,6 +31,7 @@ resource "google_compute_global_address" "assets" {
 }
 
 resource "google_compute_global_forwarding_rule" "assets" {
+  project          = var.project_id
   name       = "${var.setup_prefix}-forward-rule"
   target     = google_compute_target_http_proxy.assets.self_link
   ip_address = google_compute_global_address.assets.address
@@ -50,6 +51,7 @@ resource "google_compute_target_https_proxy" "assets" {
 }
 
 resource "google_compute_global_forwarding_rule" "https-assets" {
+  project          = var.project_id
   name       = "${var.setup_prefix}-https-forward-rule"
   target     = google_compute_target_https_proxy.assets.self_link
   ip_address = google_compute_global_address.assets.address
