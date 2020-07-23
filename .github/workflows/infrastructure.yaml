@@ -60,7 +60,7 @@ jobs:
           kubectl apply -f tools/crd/prometheus.yaml
       - name: Set Public IP for Istio
         run: |
-          kubectl patch svc istio-ingressgateway --namespace istio-system --patch '{"spec": { "loadBalancerIP": "$(jq -r '.gke_public_ip.value' terragrunt/output.json)" }}'
+          kubectl patch svc istio-ingressgateway --namespace istio-system --patch '{"spec": { "loadBalancerIP": "'"$(jq -r '.gke_public_ip.value' terragrunt/output.json)"'" }}'
       - name: Invoke Backend Workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
