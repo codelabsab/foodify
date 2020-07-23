@@ -65,6 +65,11 @@ jobs:
       - name: Build Site
         working-directory: ./web
         run: yarn build
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: gatsby
+          path: web/public/
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
@@ -72,3 +77,18 @@ jobs:
       - build
       - fetch_terraform_output
     steps:
+      - name: Get Built Site
+        uses: actions/download-artifact@v2
+        with:
+          name: gatsby
+          path: site/
+      - name: Get Terraform Output
+        uses: actions/download-artifact@v2
+        with:
+          name: terraform-output
+          path: ./
+      - name: Install GCloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: foodify-281512
+          service_account_key: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
