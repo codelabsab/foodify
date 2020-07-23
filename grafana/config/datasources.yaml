@@ -12,7 +12,7 @@ datasources:
     type: loki
     access: proxy
     orgId: 2
-    url: http://loki:3100
+    url: http://loki.foodify-default.svc.cluster.local:3100
     isDefault: false
     editable: false
   - name: Postgres
