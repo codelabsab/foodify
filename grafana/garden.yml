@@ -28,7 +28,7 @@ manifests:
             - destination:
                 port:
                   number: 3000
-                host: grafana
+                host: grafana.foodify-deafault.svc.cluster.local
   - apiVersion: apps/v1
     kind: StatefulSet
     metadata:
