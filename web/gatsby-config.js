@@ -10,7 +10,7 @@ module.exports = {
     titleTemplate: "%s · Foodify",
     description:
         "Spotify for food",
-    url: "https://codelabs-foodify.com", // No trailing slash allowed!
+    url: "https://chefster.se", // No trailing slash allowed!
     image: "/images/logo.jpg", // Path to your image you placed in the 'static' folder
     menuItems: [
       {
@@ -36,7 +36,7 @@ module.exports = {
         // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
         fieldName: "foodify",
         // Url to query from
-        url: "http://foodify.local.app.garden/api",
+        url: "http://dev.api.chefster.se/api",
       },
     },
     `gatsby-plugin-sass`,

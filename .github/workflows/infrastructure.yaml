@@ -58,9 +58,6 @@ jobs:
       - name: Install CRDs
         run: |
           kubectl apply -f tools/crd/prometheus.yaml
-      - name: Set Public IP for Istio
-        run: |
-          kubectl patch svc istio-ingressgateway --namespace istio-system --patch '{"spec": { "loadBalancerIP": "35.228.196.201" }}'
       - name: Invoke Backend Workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
