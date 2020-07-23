@@ -106,7 +106,7 @@ manifests:
       servers:
         - port:
             number: 80
-            name: api
+            name: http
             protocol: HTTP
           hosts:
             - "*"
@@ -362,7 +362,7 @@ manifests:
       http:
         - match:
             - uri:
-                prefix: /api/
+                prefix: /api
           route:
             - destination:
                 port:
