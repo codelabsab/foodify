@@ -4,6 +4,9 @@ on:
     paths:
       - 'web/**/*'
       - '.github/workflows/web.yaml'
+env:
+  TERRAGRUNT_IMAGE: eu.gcr.io/foodify-281512/terragrunt
+  DOCKER_BUILDKIT: 1
 jobs:
   fetch_terraform_output:
     name: Fetch Terraform Output
