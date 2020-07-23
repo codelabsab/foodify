@@ -330,19 +330,34 @@ dependencies:
   - api
   - recipe-command-k8s
 manifests:
-  - apiVersion: networking.k8s.io/v1beta1
-    kind: Ingress
+  - apiVersion: networking.istio.io/v1alpha3
+    kind: Gateway
     metadata:
-      name: api-ingress
+      name: api-gateway
     spec:
-      rules:
-        - http:
-            paths:
-              - path: /
-                pathType: Prefix
-                backend:
-                  serviceName: api
-                  servicePort: 9000
+      selector:
+        istio: ingressgateway # use Istio default gateway implementation
+      servers:
+        - port:
+            number: 80
+            name: http
+            protocol: HTTP
+  - apiVersion: networking.istio.io/v1alpha3
+    kind: VirtualService
+    metadata:
+      name: api
+    spec:
+      gateways:
+        - api-gateway
+      http:
+        - match:
+            - uri:
+                prefix: /
+          route:
+            - destination:
+                port:
+                  number: 9000
+                host: api
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
