@@ -362,7 +362,7 @@ manifests:
       http:
         - match:
             - uri:
-                prefix: /api
+                prefix: /api/
           route:
             - destination:
                 port:
