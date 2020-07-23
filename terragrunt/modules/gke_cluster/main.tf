@@ -24,7 +24,7 @@ locals {
 
 resource "google_container_cluster" "gke" {
   provider                 = google-beta
-  name                     = "${var.setup_prefix}"
+  name                     = var.setup_prefix
   location                 = local.gke_cluster_location
   project                  = var.project_id
   min_master_version       = data.google_container_engine_versions.info_available_k8_versions.latest_master_version

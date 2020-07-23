@@ -1,6 +1,7 @@
 
 
 resource "google_storage_bucket" "assets" {
+  project          = var.project_id
   name          = var.setup_prefix
   location      = "EU"
   storage_class = "MULTI_REGIONAL"
@@ -23,6 +24,7 @@ resource "google_compute_url_map" "assets" {
 }
 
 resource "google_compute_global_address" "assets" {
+  project          = var.project_id
   name    = "${var.setup_prefix}-ip"
 }
 
