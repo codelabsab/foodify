@@ -367,7 +367,7 @@ manifests:
             - destination:
                 port:
                   number: 9000
-                host: api.foodify-deafault.svc.cluster.local
+                host: 10.0.2.148
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
