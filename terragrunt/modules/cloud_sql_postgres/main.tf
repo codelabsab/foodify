@@ -22,12 +22,10 @@ resource "google_sql_database_instance" "master" {
 
 # Generate a random passwords for the database user
 # 16 characters in lenght
-# special characters "_%@"
 # 1 upper character
 resource "random_password" "db_password" {
   length           = 16
-  special          = true
-  override_special = "_%@"
+  special          = false
   min_upper        = 1
 }
 
