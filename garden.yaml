@@ -90,6 +90,26 @@ manifests:
     type: Opaque
     data:
       postgres_credentials.json: ${var.postgres-service-account}
+---
+kind: Module
+name: postgres-service-account-secret
+disabled: ${environment.name == 'local'}
+type: kubernetes
+manifests:
+  - apiVersion: networking.istio.io/v1alpha3
+    kind: Gateway
+    metadata:
+      name: gateway
+    spec:
+      selector:
+        istio: ingressgateway # use Istio default gateway implementation
+      servers:
+        - port:
+            number: 80
+            name: api
+            protocol: HTTP
+          hosts:
+            - "*"
 
 ########################################
 ## RECIPE COMMAND                     ##
@@ -331,20 +351,6 @@ dependencies:
   - recipe-command-k8s
 manifests:
   - apiVersion: networking.istio.io/v1alpha3
-    kind: Gateway
-    metadata:
-      name: api-gateway
-    spec:
-      selector:
-        istio: ingressgateway # use Istio default gateway implementation
-      servers:
-        - port:
-            number: 80
-            name: http
-            protocol: HTTP
-          hosts:
-            - "*"
-  - apiVersion: networking.istio.io/v1alpha3
     kind: VirtualService
     metadata:
       name: api
@@ -352,11 +358,11 @@ manifests:
       hosts:
         - "*"
       gateways:
-        - api-gateway
+        - gateway
       http:
         - match:
             - uri:
-                prefix: /
+                prefix: /api
           route:
             - destination:
                 port:

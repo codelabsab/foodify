@@ -12,20 +12,6 @@ name: grafana-k8s
 type: kubernetes
 manifests:
   - apiVersion: networking.istio.io/v1alpha3
-    kind: Gateway
-    metadata:
-      name: grafana-gateway
-    spec:
-      selector:
-        istio: ingressgateway # use Istio default gateway implementation
-      servers:
-        - port:
-            number: 80
-            name: http
-            protocol: HTTP
-          hosts:
-            - "*"
-  - apiVersion: networking.istio.io/v1alpha3
     kind: VirtualService
     metadata:
       name: grafana
@@ -33,7 +19,7 @@ manifests:
       hosts:
         - "*"
       gateways:
-        - grafana-gateway
+        - gateway
       http:
         - match:
             - uri:
