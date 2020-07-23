@@ -64,6 +64,12 @@ manifests:
                   port: http
                 initialDelaySeconds: 10
                 periodSeconds: 3
+            - name: grafana-chown
+              command: [chown, -R, "472:472", /var/lib/grafana]
+              image: busybox:latest
+              volumeMounts:
+                - name: grafana-volume
+                  mountPath: /var/lib/grafana
       volumeClaimTemplates:
         - metadata:
             name: grafana-volume
