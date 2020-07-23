@@ -11,19 +11,38 @@ kind: Module
 name: grafana-k8s
 type: kubernetes
 manifests:
-  - apiVersion: networking.k8s.io/v1beta1
-    kind: Ingress
+  - apiVersion: networking.istio.io/v1alpha3
+    kind: Gateway
     metadata:
-      name: grafana-ingress
+      name: grafana-gateway
     spec:
-      rules:
-        - http:
-            paths:
-              - path: /grafana
-                pathType: Prefix
-                backend:
-                  serviceName: grafana
-                  servicePort: 3000
+      selector:
+        istio: ingressgateway # use Istio default gateway implementation
+      servers:
+        - port:
+            number: 80
+            name: http
+            protocol: HTTP
+          hosts:
+            - "*"
+  - apiVersion: networking.istio.io/v1alpha3
+    kind: VirtualService
+    metadata:
+      name: grafana
+    spec:
+      hosts:
+        - "*"
+      gateways:
+        - grafana-gateway
+      http:
+        - match:
+            - uri:
+                prefix: /grafana
+          route:
+            - destination:
+                port:
+                  number: 3000
+                host: grafana
   - apiVersion: apps/v1
     kind: StatefulSet
     metadata:
