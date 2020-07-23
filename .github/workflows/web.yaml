@@ -5,6 +5,38 @@ on:
       - 'web/**/*'
       - '.github/workflows/web.yaml'
 jobs:
+  fetch_terraform_output:
+    name: Fetch Terraform Output
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install GCloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: foodify-281512
+          service_account_key: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
+      - name: Authenticate Docker
+        run: gcloud auth configure-docker
+      - name: Pull Terragrunt Image
+        run: |
+          docker pull ${TERRAGRUNT_IMAGE}:latest
+          docker tag ${TERRAGRUNT_IMAGE}:latest local/tools
+      - name: Authenticate Google SDK
+        working-directory: ./terragrunt
+        env:
+          GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
+        run: |
+          echo $GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE > key-file.json
+          make authci
+      - name: Get Terraform Output
+        working-directory: ./terragrunt
+        run: |
+          make terraform-output
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: terraform-output
+          path: terragrunt/output.json
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -19,6 +51,24 @@ jobs:
       - name: Test Code
         working-directory: ./web
         run: yarn test
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Install Dependencies
+        working-directory: ./web
+        run: yarn
       - name: Build Site
         working-directory: ./web
         run: yarn build
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - fetch_terraform_output
+    steps:
