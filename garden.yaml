@@ -356,7 +356,7 @@ manifests:
       name: api
     spec:
       hosts:
-        - "*"
+        - api.foodify-deafault.svc.cluster.local
       gateways:
         - gateway
       http:
@@ -367,7 +367,7 @@ manifests:
             - destination:
                 port:
                   number: 9000
-                host: api
+                host: api.foodify-deafault.svc.cluster.local
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
