@@ -337,7 +337,8 @@ manifests:
       rules:
         - http:
             paths:
-              - path: /*
+              - path: /
+                pathType: Prefix
                 backend:
                   serviceName: api
                   servicePort: 9000

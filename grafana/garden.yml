@@ -20,6 +20,7 @@ manifests:
         - http:
             paths:
               - path: /grafana
+                pathType: Prefix
                 backend:
                   serviceName: grafana
                   servicePort: 3000
