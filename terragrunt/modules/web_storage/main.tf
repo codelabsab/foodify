@@ -39,6 +39,7 @@ resource "google_compute_global_forwarding_rule" "assets" {
 }
 
 resource "google_compute_target_http_proxy" "assets" {
+  project          = var.project_id
   name    = "${var.setup_prefix}-target-proxy"
   url_map = google_compute_url_map.assets.self_link
 }
