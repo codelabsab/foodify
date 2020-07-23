@@ -77,6 +77,19 @@ name: kafka
 repo: https://charts.bitnami.com/bitnami
 chart: kafka
 version: "11.3.2"
+---
+kind: Module
+name: postgres-service-account-secret
+disabled: ${environment.name == 'local'}
+type: kubernetes
+manifests:
+  - apiVersion: v1
+    kind: Secret
+    metadata:
+      name: postgres-service-account
+    type: Opaque
+    data:
+      postgres_credentials.json: ${var.postgres-service-account}
 
 ########################################
 ## RECIPE COMMAND                     ##
@@ -119,13 +132,6 @@ name: recipe-command-k8s
 disabled: ${environment.name == 'local'}
 type: kubernetes
 manifests:
-  - apiVersion: v1
-    kind: Secret
-    metadata:
-      name: postgres-service-account
-    type: Opaque
-    data:
-      postgres_credentials.json: ${var.postgres-service-account}
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -191,15 +197,14 @@ manifests:
           port: 9000
           targetPort: http
 
-
 ########################################
 ## RECIPE QUERY                       ##
 ########################################
 ---
 kind: Module
-name: recipe-query
+name: recipe-query-local
 type: container
-dockerfile: "${environment.name == 'local' ? 'Dockerfile' : 'prod.Dockerfile'}"
+dockerfile: Dockerfile
 build:
   targetImage: recipe_query
 services:
@@ -207,7 +212,7 @@ services:
     dependencies:
       - postgres
     env:
-      POSTGRES_URI: "${environment.name == 'local' ? 'postgres://user:password@postgres-postgresql:5432/postgres' : 'postgres://${var.postgres-username}:${var.postgres-password}@${var.postgres-ip}:5432/postgres'}"
+      POSTGRES_URI: postgres://user:password@postgres-postgresql:5432/postgres
       KAFKA_URI: "kafka:9092"
       ELASTIC_SEARCH_URI: "http://elasticsearch-elasticsearch-master:9200"
     ports:
@@ -217,6 +222,68 @@ services:
       httpGet:
         port: http
         path: /health
+---
+kind: Module
+name: recipe-query
+disabled: ${environment.name == 'local'}
+type: container
+dockerfile: prod.Dockerfile
+build:
+  targetImage: recipe_query
+---
+kind: Module
+name: recipe-query-k8s
+disabled: ${environment.name == 'local'}
+type: kubernetes
+manifests:
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: recipe-query-deployment
+      labels:
+        app: recipe-query
+    spec:
+      replicas: 3
+      selector:
+        matchLabels:
+          app: recipe-query
+      template:
+        metadata:
+          labels:
+            app: recipe-query
+        spec:
+          containers:
+            - name: recipe-query
+              image: ${modules.recipe-query.outputs.deployment-image-name}:${modules.recipe-query.version}
+              env:
+                - name: POSTGRES_URI
+                  value: 'postgresql://${var.postgres-username}:${var.postgres-password}@127.0.0.1:5432/postgres'
+                - name: KAFKA_URI
+                  value: "kafka:9092"
+                - name: ELASTIC_SEARCH_URI
+                  value: "http://elasticsearch-elasticsearch-master:9200"
+              ports:
+                - name: http
+                  containerPort: 9000
+              livenessProbe:
+                httpGet:
+                  path: /health
+                  port: http
+                initialDelaySeconds: 3
+                periodSeconds: 3
+            - name: cloudsql-proxy
+              image: gcr.io/cloudsql-docker/gce-proxy:1.17
+              command: ["/cloud_sql_proxy",
+                        "-instances=${var.postgres-connection-name}=tcp:5432",
+                        "-credential_file=/cloudsql/postgres_credentials.json"]
+              volumeMounts:
+                - name: postgres-service-account-volume
+                  mountPath: /cloudsql
+                  readOnly: true
+          volumes:
+            - name: postgres-service-account-volume
+              secret:
+                secretName: postgres-service-account
 
 ########################################
 ## API                                ##
