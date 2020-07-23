@@ -3,3 +3,4 @@
 target/
 .garden/
 error.log
+.DS_Store
