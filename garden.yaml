@@ -407,7 +407,7 @@ manifests:
       selector:
         app: api
       ports:
-        - name: http
+        - name: http-web
           protocol: TCP
           port: 9000
           targetPort: http
