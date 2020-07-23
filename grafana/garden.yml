@@ -41,7 +41,7 @@ manifests:
             app: grafana
         spec:
           securityContext:
-            fsGroup: 472
+            fsGroup: 104
           containers:
             - name: grafana
               image: ${modules.grafana.outputs.deployment-image-name}:${modules.grafana.version}
