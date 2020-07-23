@@ -84,6 +84,7 @@ manifests:
                   port: http
                 initialDelaySeconds: 5
                 periodSeconds: 3
+          initContainers:
             - name: grafana-chown
               command: [chown, -R, "472:472", /var/lib/grafana]
               image: busybox:latest
