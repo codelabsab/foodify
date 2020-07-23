@@ -383,6 +383,8 @@ manifests:
         metadata:
           labels:
             app: api
+          annotations:
+            sidecar.istio.io/rewriteAppHTTPProbers: "true"
         spec:
           containers:
             - name: recipe-command

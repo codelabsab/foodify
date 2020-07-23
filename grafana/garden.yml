@@ -45,6 +45,8 @@ manifests:
         metadata:
           labels:
             app: grafana
+          annotations:
+            sidecar.istio.io/rewriteAppHTTPProbers: "true"
         spec:
           securityContext:
             fsGroup: 104
