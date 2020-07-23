@@ -25,7 +25,7 @@ resource "google_compute_url_map" "assets" {
 
 resource "google_compute_global_address" "assets" {
   project          = var.project_id
-  name    = "${var.setup_prefix}-ip"
+  name    = "${var.setup_prefix}-web-ip"
 }
 
 resource "google_compute_global_forwarding_rule" "assets" {

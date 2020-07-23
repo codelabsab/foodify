@@ -127,3 +127,8 @@ resource "google_container_node_pool" "gcc_nodes" {
     ]
   }
 }
+
+resource "google_compute_global_address" "ip" {
+  project          = var.project_id
+  name    = "${var.setup_prefix}-gke-ip"
+}
