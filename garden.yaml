@@ -92,7 +92,7 @@ manifests:
       postgres_credentials.json: ${var.postgres-service-account}
 ---
 kind: Module
-name: postgres-service-account-secret
+name: istio-gateway
 disabled: ${environment.name == 'local'}
 type: kubernetes
 manifests:
