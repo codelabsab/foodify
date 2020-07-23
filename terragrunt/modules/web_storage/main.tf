@@ -20,6 +20,7 @@ resource "google_compute_backend_bucket" "assets" {
 }
 
 resource "google_compute_url_map" "assets" {
+  project          = var.project_id
   name            = var.setup_prefix
   default_service = google_compute_backend_bucket.assets.self_link
 }
