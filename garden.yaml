@@ -33,19 +33,6 @@ values:
     createCustomResource: false
 ---
 kind: Module
-description: Loki stores logs for usage in grafana
-type: helm
-name: loki
-repo: https://grafana.github.io/loki/charts
-chart: loki-stack
-version: "0.37.3"
-values:
-  promtail:
-    enabled: true
-    loki:
-      serviceName: loki
----
-kind: Module
 description: Postgresql stores our event log
 disabled: ${environment.name != 'local'}
 type: helm

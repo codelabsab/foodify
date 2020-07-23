@@ -1,0 +1,28 @@
+kind: Module
+description: Loki stores logs for usage in grafana
+type: helm
+name: loki
+repo: https://grafana.github.io/loki/charts
+chart: loki-stack
+version: "0.38.2"
+values:
+  promtail:
+    enabled: true
+    loki:
+      serviceName: loki
+---
+kind: Module
+name: loki-k8s
+type: kubernetes
+manifests:
+  - apiVersion: networking.istio.io/v1alpha3
+    kind: VirtualService
+    metadata:
+      name: loki
+    spec:
+      hosts:
+        - loki.foodify-default.svc.cluster.local
+      http:
+        - route:
+            - destination:
+                host: loki.foodify-default.svc.cluster.local
