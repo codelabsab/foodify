@@ -49,7 +49,7 @@ manifests:
                 - name: GF_SERVER_ROOT_URL
                   value: "http://${environment.name == 'local' ? providers.local-kubernetes.outputs.default-hostname : providers.kubernetes.outputs.default-hostname}/grafana/"
                 - name: GF_SERVER_SERVE_FROM_SUB_PATH
-                  value: true
+                  value: "true"
               ports:
                 - name: http
                   containerPort: 3000
