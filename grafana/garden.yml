@@ -80,9 +80,9 @@ manifests:
                   mountPath: /var/lib/grafana
               livenessProbe:
                 httpGet:
-                  path: /
+                  path: /api/health
                   port: http
-                initialDelaySeconds: 10
+                initialDelaySeconds: 5
                 periodSeconds: 3
             - name: grafana-chown
               command: [chown, -R, "472:472", /var/lib/grafana]
@@ -104,7 +104,6 @@ manifests:
     metadata:
       name: grafana
     spec:
-      type: NodePort
       selector:
         app: grafana
       ports:
