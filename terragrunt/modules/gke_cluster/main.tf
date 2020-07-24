@@ -138,5 +138,6 @@ resource "google_compute_managed_ssl_certificate" "certificate" {
 }
 
 data "google_compute_ssl_certificate" "certificate" {
+  project  = var.project_id
   name = google_compute_managed_ssl_certificate.certificate.name
 }
