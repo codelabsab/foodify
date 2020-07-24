@@ -15,7 +15,6 @@ providers:
   - name: kubernetes
     context: ${var.kube-context}
     defaultHostname: "api.mydomain.com"
-    namespace: chefster
     deploymentRegistry:
       hostname: eu.gcr.io
       namespace: ${var.project-id}
@@ -227,9 +226,9 @@ manifests:
       hosts:
         - "api.foodify-default.svc.cluster.local"
       http:
-        route:
-          - destination:
-              host: recipe-command.foodify-default.svc.cluster.local
+        - route:
+            - destination:
+                host: recipe-command.foodify-default.svc.cluster.local
 
 ########################################
 ## RECIPE QUERY                       ##

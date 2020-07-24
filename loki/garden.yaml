@@ -21,7 +21,7 @@ manifests:
       name: loki
     spec:
       hosts:
-        - "*"
+        - "loki.foodify-default.svc.cluster.local"
       http:
         - route:
             - destination:
