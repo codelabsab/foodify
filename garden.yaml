@@ -199,6 +199,17 @@ manifests:
           protocol: TCP
           port: 9000
           targetPort: http
+  - apiVersion: networking.istio.io/v1alpha3
+    kind: VirtualService
+    metadata:
+      name: recipe-command
+    spec:
+      hosts:
+        - "api.foodify-default.svc.cluster.local"
+      http:
+        route:
+          - destination:
+              host: recipe-command.foodify-default.svc.cluster.local
 
 ########################################
 ## RECIPE QUERY                       ##
