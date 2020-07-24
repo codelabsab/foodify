@@ -15,6 +15,7 @@ providers:
   - name: kubernetes
     context: ${var.kube-context}
     defaultHostname: "api.mydomain.com"
+    namespace: chefster
     deploymentRegistry:
       hostname: eu.gcr.io
       namespace: ${var.project-id}
