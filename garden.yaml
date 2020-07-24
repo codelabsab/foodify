@@ -50,14 +50,6 @@ values:
       enabled: true
 ---
 kind: Module
-description: Elastic Search stores our views
-type: helm
-name: elasticsearch
-repo: https://charts.bitnami.com/bitnami
-chart: elasticsearch
-version: "12.5.1"
----
-kind: Module
 description: Kafka passes messages
 type: helm
 name: kafka
@@ -263,7 +255,7 @@ manifests:
                 - name: KAFKA_URI
                   value: "kafka:9092"
                 - name: ELASTIC_SEARCH_URI
-                  value: "http://elasticsearch-elasticsearch-master:9200"
+                  value: "http://elasticsearch-elasticsearch-master.foodify-default.svc.cluster.local:9200"
               ports:
                 - name: http
                   containerPort: 9000
@@ -366,7 +358,7 @@ manifests:
               image: ${modules.api.outputs.deployment-image-name}:${modules.api.version}
               env:
                 - name: ELASTIC_SEARCH_URI
-                  value: "http://elasticsearch-elasticsearch-master:9200"
+                  value: "http://elasticsearch-elasticsearch-master.foodify-default.svc.cluster.local:9200"
               ports:
                 - name: http
                   containerPort: 9000

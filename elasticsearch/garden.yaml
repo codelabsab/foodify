@@ -1,0 +1,25 @@
+kind: Module
+description: Elastic Search stores our views
+type: helm
+name: elasticsearch
+repo: https://charts.bitnami.com/bitnami
+chart: elasticsearch
+version: "12.5.1"
+---
+kind: Module
+name: elasticsearch-k8s
+type: kubernetes
+disabled: ${environment.name == 'local'}
+manifests:
+  - apiVersion: networking.istio.io/v1alpha3
+    kind: VirtualService
+    metadata:
+      name: elasticsearch
+    spec:
+      hosts:
+        - "api.foodify-default.svc.cluster.local"
+        - "recipe-query.foodify-default.svc.cluster.local"
+      http:
+          route:
+            - destination:
+                host: elasticsearch-elasticsearch-master.foodify-default.svc.cluster.local
