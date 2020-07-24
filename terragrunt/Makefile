@@ -58,6 +58,17 @@ terraform:
 	/bin/bash -c 'cd /app/live/dev && yes | terragrunt apply-all --terragrunt-ignore-external-dependencies terragrunt-source-update terragrunt-non-interactive terragrunt-ignore-dependency-errors'
 
 
+.PHONY: terraform-destroy
+terraform-destroy:
+	@docker run -t --volumes-from ${DOCKER_CONTAINER_NAME}-config \
+	-v `pwd`:/app/ \
+	--entrypoint /app/docker-entrypoint.sh \
+	--workdir /app/ \
+  --env GOOGLE_SECRET_NAME="${GOOGLE_SECRET_NAME}" \
+	local/tools \
+	/bin/bash -c 'cd /app/live/dev && yes | terragrunt destroy-all --terragrunt-ignore-external-dependencies terragrunt-source-update terragrunt-non-interactive terragrunt-ignore-dependency-errors'
+
+
 .PHONY: terraform-output
 terraform-output:
 	@docker run -t --volumes-from ${DOCKER_CONTAINER_NAME}-config \

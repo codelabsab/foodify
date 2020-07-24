@@ -1,0 +1,39 @@
+name: Infrastructure - Destroy ☠️
+on:
+  workflow_dispatch: {}
+env:
+  CACHE_IMAGE: eu.gcr.io/foodify-281512/terragrunt
+  DOCKER_BUILDKIT: 1
+jobs:
+  destroy_infra:
+    name: Destroy Infra
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install GCloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: foodify-281512
+          service_account_key: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
+      - name: Authenticate Docker
+        run: gcloud auth configure-docker
+      - name: Build Image
+        working-directory: ./terragrunt
+        run: |
+          make buildci
+      - name: Push Terragrunt Image
+        run: docker push $CACHE_IMAGE:latest
+      - name: Authenticate Google SDK
+        working-directory: ./terragrunt
+        env:
+          GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE: ${{ secrets.GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE }}
+        run: |
+          echo $GCP_TERRAFORM_SERVICE_ACCOUNT_KEY_FILE > key-file.json
+          make authci
+      - name: Destroy Resources
+        working-directory: ./terragrunt
+        env:
+          TERRAGRUNT_AUTO_INIT: "true"
+        run: |
+          make terraform-destroy
