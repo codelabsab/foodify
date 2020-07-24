@@ -76,6 +76,24 @@ name: istio-gateway
 disabled: ${environment.name == 'local'}
 type: kubernetes
 manifests:
+  - apiVersion: cert-manager.io/v1alpha2
+    kind: Issuer
+    metadata:
+      name: test-selfsigned
+      namespace: istio-system
+    spec:
+      selfSigned: {}
+  - apiVersion: cert-manager.io/v1alpha2
+    kind: Certificate
+    metadata:
+      name: ingress-cert
+      namespace: istio-system
+    spec:
+      dnsNames:
+        - live.api.chefster.se
+      secretName: ingress-cert
+      issuerRef:
+        name: test-selfsigned
   - apiVersion: networking.istio.io/v1alpha3
     kind: Gateway
     metadata:
@@ -98,8 +116,7 @@ manifests:
             protocol: HTTPS
           tls:
             mode: SIMPLE
-            privateKey: /etc/istio/ingressgateway-certs/tls.key
-            serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+            credentialName: ingress-cert
           hosts:
             - "*"
 

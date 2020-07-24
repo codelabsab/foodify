@@ -31,11 +31,3 @@ output "gke_zones" {
   description = "Output available compute zones as list(string)"
   value       = data.google_compute_zones.info_available_k8_zones.names
 }
-
-output "gke_ssl_pub_key" {
-  value       = data.google_compute_ssl_certificate.certificate.certificate
-}
-
-output "gke_ssl_private_key" {
-  value       = data.google_compute_ssl_certificate.certificate.private_key
-}
