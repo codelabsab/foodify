@@ -1,9 +1,10 @@
 <h1 align="center">Foodify 🌮</h1>
 <p align="center">Food and fy</p>
 <p align="center">
-    <a href="https://github.com/codelabsab/foodify/actions?query=workflow%3ATest"><img src="https://github.com/codelabsab/foodify/workflows/Test/badge.svg"/></a>
+    <a href="https://github.com/codelabsab/foodify/actions?query=workflow%3AWebsite"><img src="https://github.com/codelabsab/foodify/workflows/Website/badge.svg"/></a>
+    <a href="https://github.com/codelabsab/foodify/actions?query=workflow%3ABackend"><img src="https://github.com/codelabsab/foodify/workflows/Backend/badge.svg"/></a>
+    <a href="https://github.com/codelabsab/foodify/actions?query=workflow%3AInfrastructure"><img src="https://github.com/codelabsab/foodify/workflows/Infrastructure/badge.svg"/></a>
 </p>
-
 
 # Local development
 Instructions on how to setup a local development environment and start developing! 👨‍💻👩‍💻
