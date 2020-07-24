@@ -63,7 +63,7 @@ jobs:
         run: |
           echo "$(jq -r '.gke_ssl_pub_key.value' output.json)" > certifcate.pem
           echo "$(jq -r '.gke_ssl_private_key.value' output.json)" > private-key.pem
-          kubectl apply --namespace istio-system secret tls istio-ingressgateway-certs --key private-key.pem --cert certifcate.pem
+          kubectl create --namespace istio-system secret tls istio-ingressgateway-certs --key private-key.pem --cert certifcate.pem --dry-run=true -o yaml | kubectl apply -f -
       - name: Invoke Backend Workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
