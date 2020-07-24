@@ -128,7 +128,15 @@ resource "google_container_node_pool" "gcc_nodes" {
   }
 }
 
-resource "google_compute_global_address" "ip" {
-  project          = var.project_id
-  name    = "${var.setup_prefix}-gke-ip"
+resource "google_compute_managed_ssl_certificate" "certificate" {
+  provider = google-beta
+  project  = var.project_id
+  name     = "${var.setup_prefix}-gke-certificate"
+  managed {
+    domains = ["${var.environment}.api.chefster.se"]
+  }
+}
+
+data "google_compute_ssl_certificate" "certificate" {
+  name = google_compute_managed_ssl_certificate.certificate.name
 }
